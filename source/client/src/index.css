@@ -2,3 +2,18 @@
   margin: 0;
   padding: 0;
 }
+
+:root {
+  --navbar-height: 4rem;
+}
+
+.root-container {
+  display: flex;
+}
+
+.nav-outlet-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: aqua;
+}
