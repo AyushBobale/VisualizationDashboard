@@ -1,3 +1,9 @@
+.sidebar-closed {
+  display: none;
+}
+
 .sidebar {
   background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
 }

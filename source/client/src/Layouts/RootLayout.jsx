@@ -8,7 +8,7 @@ function RootLayout() {
   const [sideBar, setSideBar] = useState(true);
   return (
     <div className="root-container">
-      <Sidebar />
+      <Sidebar sideBar={sideBar} setSideBar={setSideBar} />
       <div className="nav-outlet-container">
         <Navbar />
         <div className="outlet-container">
