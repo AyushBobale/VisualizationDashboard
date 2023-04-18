@@ -1,4 +1,4 @@
-import data from "./jsondata.json";
+import data from "./jsondata.json" assert { type: "json" };
 import mongoose from "mongoose";
 
 const DataSchema = new mongoose.Schema({
@@ -56,19 +56,5 @@ const DataSchema = new mongoose.Schema({
 });
 
 const DataModel = mongoose.model("Data", DataSchema);
-try {
-  const count = await DataModel.countDocuments({});
-
-  if (count > 0) {
-    // const delOK = await DataModel.drop();
-    console.log("Collection exists");
-  } else {
-    const createMany = await DataModel.create(data);
-    console.log("Collection does not exist");
-    if (createMany) console.log("Collection created");
-  }
-} catch (err) {
-  console.error(err);
-}
 
 export default DataModel;
