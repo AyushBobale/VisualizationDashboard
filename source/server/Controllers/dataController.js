@@ -6,3 +6,5 @@ const getAllData = async (req, res, next) => {
     next(error);
   }
 };
+
+export { getAllData };

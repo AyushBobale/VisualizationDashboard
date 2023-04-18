@@ -11,7 +11,6 @@ const deleteLogFile = () => {
 };
 
 const deleteInterval = setInterval(() => {
-  // Delete log file every day at midnight (00:00:00)
   const now = new Date();
   if (
     now.getHours() === 0 &&
