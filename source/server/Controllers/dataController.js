@@ -1,6 +1,7 @@
 import {
   addInitialService,
   getAllDataService,
+  getSortedDataService,
 } from "../Services/dataService.js";
 
 import DataModel from "../Models/dataModel.js";
@@ -9,6 +10,32 @@ import { STATUS } from "../config.js";
 const getAllDataController = async (req, res, next) => {
   try {
     const data = await getAllDataService();
+    if (data) {
+      res.status(200).json({
+        type: STATUS.SUCCESS,
+        message: "Fetched data sucessfully",
+        data: data,
+      });
+    }
+    if (!data) {
+      res.status(200).json({
+        type: STATUS.FAILURE,
+        message: "Could not fetch data",
+        data: [],
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllSortedDataController = async (req, res, next) => {
+  try {
+    let filter = {};
+    if (req.body?.sortParam) {
+      filter[req.body?.sortParam] = req.body?.sortValue;
+    }
+    const data = await getSortedDataService(filter);
     if (data) {
       res.status(200).json({
         type: STATUS.SUCCESS,
@@ -44,4 +71,8 @@ const addInitialDataController = async (data) => {
   }
 };
 
-export { getAllDataController, addInitialDataController };
+export {
+  getAllDataController,
+  addInitialDataController,
+  getAllSortedDataController,
+};

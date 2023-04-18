@@ -19,4 +19,8 @@ const addInitialService = async (data) => {
   }
 };
 
-export { getAllDataService, addInitialService };
+const getSortedDataService = async (data) => {
+  return DataModel.find({}).sort(data);
+};
+
+export { getAllDataService, addInitialService, getSortedDataService };

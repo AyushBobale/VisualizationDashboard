@@ -2,6 +2,7 @@ export const API_ROOT = "http://localhost:5000/api";
 export const LINKS = {
   API_ROOT: API_ROOT,
   GET_DATA: `${API_ROOT}/data`,
+  GET_SORTED_DATA: `${API_ROOT}/data/sort`,
 };
 
 export const ROUTER_ROOT = "/";

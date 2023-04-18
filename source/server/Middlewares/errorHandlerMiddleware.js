@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
   res.status(500).json({
-    type: SERVER_ERROR,
+    type: "SERVER_ERROR",
     errors: [{ 1: "Error from error handler" }],
     message: err.message,
 

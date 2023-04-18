@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 import { ApiRouter } from "./Routes/apiRouter.js";
+import { DataRouter } from "./Routes/dataRouter.js";
 import connectDB from "./database/connection.js";
 import cors from "cors";
 import errorHandler from "./Middlewares/errorHandlerMiddleware.js";
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 //
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [process.env.CORS_DOMAIN],
@@ -19,7 +22,7 @@ app.use(
 
 // Routers
 app.use("/api", ApiRouter);
-
+app.use("/data", DataRouter);
 // error logging and handling
 app.use(errorLogger);
 app.use(errorHandler);
