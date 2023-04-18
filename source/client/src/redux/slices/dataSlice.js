@@ -14,12 +14,9 @@ export const getAllDataThunk = createAsyncThunk("/data", async () => {
 
 export const getAllSortedDataThunk = createAsyncThunk(
   "/data/sort",
-  async () => {
+  async (data) => {
     try {
-      const res = await axios.post(LINKS.GET_SORTED_DATA, {
-        sortParam: "intensity",
-        sortValue: 1,
-      });
+      const res = await axios.post(LINKS.GET_SORTED_DATA, data);
       return res.data;
     } catch (error) {
       return error.response.data;

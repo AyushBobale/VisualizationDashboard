@@ -3,6 +3,11 @@
 }
 
 .sidebar {
+  height: 100vh;
+  position: sticky;
+  left: 0;
+  top: 0;
+  bottom: 0;
   background-color: blueviolet;
   display: flex;
   flex-direction: column;

@@ -7,13 +7,20 @@ import {
 } from "../../redux/slices/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useSearchParams } from "react-router-dom";
+
 function Dashboard() {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const data = useSelector((state) => state.rootReducer?.data?.data?.entries);
 
   useEffect(() => {
-    // dispatch(getAllDataThunk());
-    dispatch(getAllSortedDataThunk());
+    dispatch(
+      getAllSortedDataThunk({
+        sortParam: searchParams.get("sortParam"),
+        sortValue: searchParams.get("sortValue"),
+      })
+    );
   }, []);
 
   return (
