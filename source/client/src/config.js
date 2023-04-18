@@ -4,6 +4,12 @@ export const LINKS = {
   GET_DATA: `${API_ROOT}/data`,
 };
 
+export const ROUTER_ROOT = "/";
+export const ROUTES = {
+  ROOT: ROUTER_ROOT,
+  DASHBOARD: `${ROUTER_ROOT}dashboard`,
+};
+
 export const REJECTED_ERROR = {
   message: "server did not respond",
   type: "SERVER ERROR",
