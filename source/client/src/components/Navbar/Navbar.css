@@ -1,9 +1,18 @@
 .navbar {
-  height: var(--navbar-height);
-  width: 100%;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  background-color: aquamarine;
+  background-color: var(--primary);
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar-inner {
+  border-radius: 6px;
+  border: 2px solid var(--primary-border);
+  padding: 1rem;
+  width: 100%;
 }
