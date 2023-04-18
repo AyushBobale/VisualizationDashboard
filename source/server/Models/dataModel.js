@@ -1,4 +1,3 @@
-import data from "./jsondata.json" assert { type: "json" };
 import mongoose from "mongoose";
 
 const DataSchema = new mongoose.Schema({
