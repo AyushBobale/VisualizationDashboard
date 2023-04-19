@@ -81,8 +81,15 @@ function Dashboard() {
   const formatForYears = (data) => {
     let formattedData = {};
     for (const idx in data) {
-      formattedData[idx] = data?.[idx]?.intensity;
+      const year = data?.[idx]?.end_year;
+      // console.log(data?.[idx]?.end_year);
+      if (formattedData?.[year]) {
+        formattedData[year] = formattedData[year] + data?.[idx]?.intensity;
+      } else {
+        formattedData[year] = data?.[idx]?.intensity;
+      }
     }
+    delete formattedData[null];
     return formattedData;
   };
 
