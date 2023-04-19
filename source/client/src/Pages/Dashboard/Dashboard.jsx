@@ -106,7 +106,6 @@ function Dashboard() {
   );
 
   const [selectedAttribute, setSelectedAttribute] = useState(attributes[0]);
-  console.log(selectedAttribute);
   // this use effect is used to refelect the changes from link to state vars
   useEffect(() => {
     setSelectedCountry(searchParams.get("country"));
@@ -174,6 +173,11 @@ function Dashboard() {
     return formattedData;
   };
 
+  // console.log(
+  //   attributes?.filter((elm) => selectedAttribute?.key == elm.key)?.[0]
+  //     ?.backGroundColor
+  // );
+
   return (
     <div className="dash-container">
       Dashboard
@@ -234,8 +238,16 @@ function Dashboard() {
               selectdSortParam?.key,
               selectedAttribute?.key
             )}
-            borderColor={borderColor}
-            bgColor={bgColor}
+            borderColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.borderColor
+            }
+            bgColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.backGroundColor
+            }
             label={`${selectedAttribute?.value} Sum`}
             title={`${selectedAttribute?.value} Sum per year`}
           />
@@ -247,8 +259,16 @@ function Dashboard() {
               selectdSortParam?.key,
               selectedAttribute?.key
             )}
-            borderColor={bgColor}
-            bgColor={borderColor}
+            borderColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.borderColor
+            }
+            bgColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.backGroundColor
+            }
             label={[`${selectedAttribute?.value} Sum`]}
             title={`${selectedAttribute?.value} Sum per year`}
           />

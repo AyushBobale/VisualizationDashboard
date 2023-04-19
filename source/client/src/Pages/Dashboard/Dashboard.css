@@ -18,8 +18,8 @@
 
 .charts-grid {
   display: grid;
-  grid-template-areas: "var var" "line1 bar1" "bar2 bar2" "line2 line2";
-  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "var var var" "line1 line1 bar2" "bar1 bar1 bar2" "line2 line2 line2";
+  grid-template-columns: 1fr 1fr 4fr;
 }
 
 .var-select {
