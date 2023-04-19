@@ -14,7 +14,7 @@ const Dropdown = ({
 
   const handleOptionClick = (option) => {
     const params = Object.fromEntries(searchParams);
-    params[paramName] = option;
+    params[paramName] = option?.key ? option?.key : option;
     setSearchParams(createSearchParams(params));
     onSelectedOptionChange?.(option);
     setIsOpen(false);
@@ -29,7 +29,7 @@ const Dropdown = ({
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
-        {selectedOption}
+        {selectedOption?.value ? selectedOption?.value : selectedOption}
       </div>
       {isOpen && (
         <div className="dropdown-options">
@@ -42,11 +42,11 @@ const Dropdown = ({
           </div>
           {options?.map((option) => (
             <div
-              key={option}
+              key={option?.key ? option?.key : option}
               className="dropdown-option"
               onClick={() => handleOptionClick(option)}
             >
-              {option}
+              {option?.value ? option?.value : option}
             </div>
           ))}
         </div>

@@ -19,7 +19,17 @@ function Dashboard() {
   const distinct = useSelector(
     (state) => state.rootReducer?.data?.data?.distinct
   );
-
+  const options = [
+    {
+      value: "Start year",
+      key: "start_year",
+    },
+    {
+      value: "End year",
+      key: "end_year",
+    },
+    ,
+  ];
   useEffect(() => {
     dispatch(
       getAllSortedDataThunk({
@@ -44,6 +54,7 @@ function Dashboard() {
   }, [searchParams]);
 
   // drop down
+  const [selectdSortParam, setSelectedSortParam] = useState();
   const [selectedEndYear, setSelectedEndYear] = useState(
     distinct?.end_year?.[0]
   );
@@ -59,6 +70,16 @@ function Dashboard() {
   return (
     <div className="dash-container">
       Dashboard
+      <div className="drop-down-root-cont">
+        <div className="drop-down-cont">
+          <Dropdown
+            paramName={"sortParam"}
+            options={options}
+            selectedOption={selectdSortParam}
+            onSelectedOptionChange={setSelectedSortParam}
+          />
+        </div>
+      </div>
       <div className="drop-down-root-cont">
         <div className="drop-down-cont">
           <Dropdown
