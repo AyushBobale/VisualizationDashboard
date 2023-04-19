@@ -32,6 +32,18 @@ function Dashboard() {
     },
     ,
   ];
+
+  const attributes = [
+    {
+      value: "Relevance",
+      key: "relevance",
+    },
+    {
+      value: "Intensity",
+      key: "intensity",
+    },
+  ];
+
   useEffect(() => {
     dispatch(
       getAllSortedDataThunk({
@@ -75,6 +87,8 @@ function Dashboard() {
     distinct?.country?.[0]
   );
 
+  const [selectedAttribute, setSelectedAttribute] = useState(attributes[0]);
+  console.log(selectedAttribute);
   // this use effect is used to refelect the changes from link to state vars
   useEffect(() => {
     setSelectedCountry(searchParams.get("country"));
@@ -99,8 +113,6 @@ function Dashboard() {
     }
   }, [searchParams.get("sortParam"), distinct]);
 
-  console.log(sortOptions);
-
   const borderColor = "rgba(255, 130, 130, 0.5)";
   const bgColor = "white";
 
@@ -120,7 +132,6 @@ function Dashboard() {
   };
 
   const [chartSortParam, setChartSortParam] = useState("end_year");
-  const [chartDataParam, setChartDataParam] = useState("relevance");
 
   return (
     <div className="dash-container">
@@ -175,17 +186,26 @@ function Dashboard() {
         </div>
       </div>
       <div className="charts-grid">
+        <div className="drop-down-cont var-select">
+          Attribute
+          <Dropdown
+            paramName={"attribute"}
+            options={attributes}
+            selectedOption={selectedAttribute}
+            onSelectedOptionChange={setSelectedAttribute}
+          />
+        </div>
         <div className="line1">
           <LineChart
             data={formatedSortParamVsDataParamSum(
               data,
               chartSortParam,
-              chartDataParam
+              selectedAttribute?.key
             )}
             borderColor={borderColor}
             bgColor={bgColor}
-            label={`${chartDataParam} Sum`}
-            title={`${chartDataParam} Sum per year`}
+            label={`${selectedAttribute?.value} Sum`}
+            title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
         <div className="bar1">
@@ -193,12 +213,12 @@ function Dashboard() {
             data={formatedSortParamVsDataParamSum(
               data,
               chartSortParam,
-              chartDataParam
+              selectedAttribute?.key
             )}
             borderColor={bgColor}
             bgColor={borderColor}
-            label={[`${chartDataParam} Sum`]}
-            title={`${chartDataParam} Sum per year`}
+            label={[`${selectedAttribute?.value} Sum`]}
+            title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
         <div className="bar2">
@@ -206,7 +226,7 @@ function Dashboard() {
             data={formatedSortParamVsDataParamSum(
               data,
               chartSortParam,
-              chartDataParam
+              selectedAttribute?.value
             )}
             borderColor={bgColor}
             bgColor={borderColor}
