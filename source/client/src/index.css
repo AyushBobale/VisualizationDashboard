@@ -7,6 +7,11 @@
   color: #33303c;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-font-color) var(--primary-border);
+}
+
 :root {
   --primary: #f4f4f5;
   --primary-border: #cdcdcd;
@@ -23,4 +28,31 @@
   width: 100%;
   padding: 0rem 6rem;
   background-color: var(--primary);
+}
+
+/* scroll bar */
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
 }

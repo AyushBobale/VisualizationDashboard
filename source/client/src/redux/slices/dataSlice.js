@@ -24,6 +24,18 @@ export const getAllSortedDataThunk = createAsyncThunk(
   }
 );
 
+export const getAllDistinctDataThunk = createAsyncThunk(
+  "/data/distinct",
+  async (data) => {
+    try {
+      const res = await axios.get(LINKS.GET_DISTINCT_DATA);
+      return res.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   errorData: {
@@ -34,10 +46,12 @@ const initialState = {
   isError: false,
   data: {
     entries: [],
+    distinct: {},
   },
   status: {
     getAllDataThunk: THUNK_STATUS.IDLE,
     getAllSortedDataThunk: THUNK_STATUS.IDLE,
+    getAllDistinctDataThunk: THUNK_STATUS.IDLE,
   },
 };
 
@@ -71,6 +85,7 @@ const dataSlice = createSlice({
         state.status.getAllDataThunk = THUNK_STATUS.ERROR;
         state.errorData = REJECTED_ERROR;
       })
+      // sosrted data
       .addCase(getAllSortedDataThunk.pending, (state, action) => {
         state.loading = true;
       })
@@ -94,6 +109,32 @@ const dataSlice = createSlice({
       .addCase(getAllSortedDataThunk.rejected, (state, action) => {
         state.loading = false;
         state.status.getAllSortedDataThunk = THUNK_STATUS.ERROR;
+        state.errorData = REJECTED_ERROR;
+      })
+      // distinct data
+      .addCase(getAllDistinctDataThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getAllDistinctDataThunk.fulfilled, (state, { payload }) => {
+        state.status.getAllDistinctDataThunk = THUNK_STATUS.FULFILLED;
+        switch (payload.type) {
+          case STATUS.SUCCESS:
+            state.loading = false;
+            state.data.distinct = payload.data;
+            break;
+          default:
+            state.loading = false;
+            state.isError = true;
+            state.errorData = {
+              message: payload.message,
+              type: payload.type,
+              errors: payload.errors,
+            };
+        }
+      })
+      .addCase(getAllDistinctDataThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.status.getAllDistinctDataThunk = THUNK_STATUS.ERROR;
         state.errorData = REJECTED_ERROR;
       });
   },

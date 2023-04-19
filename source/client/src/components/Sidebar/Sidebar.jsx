@@ -11,7 +11,7 @@ function Sidebar({ sideBar, setSideBar }) {
         <Link to={ROUTES.ROOT}>Home</Link>
       </div>
       <div>
-        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        <Link to={ROUTES.DASHBOARD} >Dashboard</Link>
       </div>
     </div>
   );

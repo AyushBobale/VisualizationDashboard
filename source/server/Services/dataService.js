@@ -23,4 +23,18 @@ const getSortedDataService = async (data) => {
   return DataModel.find({}).sort(data);
 };
 
-export { getAllDataService, addInitialService, getSortedDataService };
+const getDistinctElemService = async (data) => {
+  const end_year = await DataModel.distinct(
+    "end_year",
+    { end_year: { $ne: null } },
+    { end_year: 1 }
+  );
+  return { end_year: end_year?.sort() };
+};
+
+export {
+  getAllDataService,
+  addInitialService,
+  getSortedDataService,
+  getDistinctElemService,
+};

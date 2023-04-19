@@ -5,7 +5,7 @@ import data from "../jsondata.json" assert { type: "json" };
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
-    await addInitialDataController(data);
+    // await addInitialDataController(data);
     console.log(`Mongo DB Conected ${conn.connection.host}`);
   } catch (err) {
     console.log(err);

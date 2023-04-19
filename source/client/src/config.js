@@ -3,6 +3,7 @@ export const LINKS = {
   API_ROOT: API_ROOT,
   GET_DATA: `${API_ROOT}/data`,
   GET_SORTED_DATA: `${API_ROOT}/data/sort`,
+  GET_DISTINCT_DATA: `${API_ROOT}/data/distinct`,
 };
 
 export const ROUTER_ROOT = "/";
