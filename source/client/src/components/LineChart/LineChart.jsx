@@ -2,7 +2,7 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import React from "react";
 
-function LineChart({ data }) {
+function LineChart({ data, label, bgColor, borderColor }) {
   const labels = ["January", "February", "March", "April", "May", "June"];
   console.log(Object.values(data));
 
@@ -10,9 +10,9 @@ function LineChart({ data }) {
     labels: Object.keys(data),
     datasets: [
       {
-        label: "My First dataset",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
+        label: label,
+        backgroundColor: bgColor,
+        borderColor: borderColor,
         data: Object.values(data),
       },
     ],

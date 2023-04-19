@@ -1,0 +1,96 @@
+Date : 2023-04-19 17:27:04
+Directory : d:\Ayush\datavisual\VisualizationDashboard
+Total : 38 files,  52940 codes, 58 comments, 198 blanks, all 53196 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JSON           |          6 |     51,825 |          0 |          6 |     51,831 |
+| JavaScript     |         15 |        554 |         28 |         82 |        664 |
+| JavaScript JSX |          9 |        367 |          2 |         52 |        421 |
+| CSS            |          5 |        133 |          5 |         24 |        162 |
+| Markdown       |          2 |         39 |          0 |         33 |         72 |
+| HTML           |          1 |         22 |         23 |          1 |         46 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                |         38 |     52,940 |         58 |        198 |     53,196 |
+| . (Files)                                                                                        |          1 |          1 |          0 |          0 |          1 |
+| source                                                                                           |         37 |     52,939 |         58 |        198 |     53,195 |
+| source\client                                                                                    |         24 |     31,435 |         33 |        137 |     31,605 |
+| source\client (Files)                                                                            |          3 |     30,693 |          0 |         35 |     30,728 |
+| source\client\public                                                                             |          2 |         47 |         23 |          2 |         72 |
+| source\client\src                                                                                |         19 |        695 |         10 |        100 |        805 |
+| source\client\src (Files)                                                                        |          4 |        110 |          5 |         22 |        137 |
+| source\client\src\Hooks                                                                          |          1 |         10 |          0 |          4 |         14 |
+| source\client\src\Layouts                                                                        |          1 |         19 |          0 |          4 |         23 |
+| source\client\src\Pages                                                                          |          3 |        152 |          2 |         17 |        171 |
+| source\client\src\Pages\Dashboard                                                                |          2 |        141 |          2 |         14 |        157 |
+| source\client\src\Pages\PageNotFound                                                             |          1 |         11 |          0 |          3 |         14 |
+| source\client\src\components                                                                     |          8 |        259 |          0 |         41 |        300 |
+| source\client\src\components\BarChart                                                            |          1 |         77 |          0 |         11 |         88 |
+| source\client\src\components\Dropdown                                                            |          2 |         87 |          0 |         12 |         99 |
+| source\client\src\components\LineChart                                                           |          1 |         24 |          0 |          4 |         28 |
+| source\client\src\components\Navbar                                                              |          2 |         28 |          0 |          6 |         34 |
+| source\client\src\components\Sidebar                                                             |          2 |         43 |          0 |          8 |         51 |
+| source\client\src\redux                                                                          |          2 |        145 |          3 |         12 |        160 |
+| source\client\src\redux (Files)                                                                  |          1 |         10 |          1 |          4 |         15 |
+| source\client\src\redux\slices                                                                   |          1 |        135 |          2 |          8 |        145 |
+| source\server                                                                                    |         13 |     21,504 |         25 |         61 |     21,590 |
+| source\server (Files)                                                                            |          5 |     21,174 |          3 |          9 |     21,186 |
+| source\server\Controllers                                                                        |          1 |         97 |          1 |          8 |        106 |
+| source\server\Middlewares                                                                        |          2 |         56 |          0 |         14 |         70 |
+| source\server\Models                                                                             |          1 |         56 |          0 |          4 |         60 |
+| source\server\Routes                                                                             |          2 |         16 |          0 |          7 |         23 |
+| source\server\Services                                                                           |          1 |         92 |         20 |         16 |        128 |
+| source\server\database                                                                           |          1 |         13 |          1 |          3 |         17 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                         | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\Ayush\datavisual\VisualizationDashboard\README.md                                             | Markdown       |          1 |          0 |          0 |          1 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\README.md                               | Markdown       |         38 |          0 |         33 |         71 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\package-lock.json                       | JSON           |     30,609 |          0 |          1 |     30,610 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\package.json                            | JSON           |         46 |          0 |          1 |         47 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\public\index.html                       | HTML           |         22 |         23 |          1 |         46 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\public\manifest.json                    | JSON           |         25 |          0 |          1 |         26 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\App.jsx                             | JavaScript JSX |         26 |          0 |          4 |         30 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Hooks\useD3hook.js                  | JavaScript     |         10 |          0 |          4 |         14 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Layouts\RootLayout.jsx              | JavaScript JSX |         19 |          0 |          4 |         23 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\Dashboard\Dashboard.css       | CSS            |         15 |          0 |          3 |         18 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\Dashboard\Dashboard.jsx       | JavaScript JSX |        126 |          2 |         11 |        139 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\PageNotFound\PageNotFound.jsx | JavaScript JSX |         11 |          0 |          3 |         14 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\BarChart\BarChart.jsx    | JavaScript JSX |         77 |          0 |         11 |         88 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Dropdown\Dropdown.css    | CSS            |         30 |          0 |          5 |         35 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Dropdown\Dropdown.jsx    | JavaScript JSX |         57 |          0 |          7 |         64 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\LineChart\LineChart.jsx  | JavaScript JSX |         24 |          0 |          4 |         28 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Navbar\Navbar.css        | CSS            |         18 |          0 |          2 |         20 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Navbar\Navbar.jsx        | JavaScript JSX |         10 |          0 |          4 |         14 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Sidebar\Sidebar.css      | CSS            |         26 |          0 |          4 |         30 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Sidebar\Sidebar.jsx      | JavaScript JSX |         17 |          0 |          4 |         21 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\config.js                           | JavaScript     |         26 |          0 |          5 |         31 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\index.css                           | CSS            |         44 |          5 |         10 |         59 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\index.js                            | JavaScript     |         14 |          0 |          3 |         17 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\redux\slices\dataSlice.js           | JavaScript     |        135 |          2 |          8 |        145 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\client\src\redux\store.js                      | JavaScript     |         10 |          1 |          4 |         15 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Controllers\dataController.js           | JavaScript     |         97 |          1 |          8 |        106 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Middlewares\errorHandlerMiddleware.js   | JavaScript     |         13 |          0 |          3 |         16 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Middlewares\errorLoggerMiddleware.js    | JavaScript     |         43 |          0 |         11 |         54 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Models\dataModel.js                     | JavaScript     |         56 |          0 |          4 |         60 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Routes\apiRouter.js                     | JavaScript     |          5 |          0 |          3 |          8 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Routes\dataRouter.js                    | JavaScript     |         11 |          0 |          4 |         15 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\Services\dataService.js                 | JavaScript     |         92 |         20 |         16 |        128 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\config.js                               | JavaScript     |          4 |          0 |          1 |          5 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\database\connection.js                  | JavaScript     |         13 |          1 |          3 |         17 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\index.js                                | JavaScript     |         25 |          3 |          5 |         33 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\jsondata.json                           | JSON           |     19,002 |          0 |          1 |     19,003 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\package-lock.json                       | JSON           |      2,121 |          0 |          1 |      2,122 |
+| d:\Ayush\datavisual\VisualizationDashboard\source\server\package.json                            | JSON           |         22 |          0 |          1 |         23 |
+| Total                                                                                            |                |     52,940 |         58 |        198 |     53,196 |
++--------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

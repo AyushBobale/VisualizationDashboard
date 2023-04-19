@@ -1,8 +1,10 @@
-import { Bar } from "react-chartjs-2";
+// ./components/PieChart.js
+
 import Chart from "chart.js/auto";
+import { Pie } from "react-chartjs-2";
 import React from "react";
 
-const BarChart = ({ data, label, bgColor, borderColor }) => {
+const PieChart = ({ data, label, bgColor, borderColor }) => {
   const labels = ["January", "February", "March", "April", "May", "June"];
   const dataNew = {
     labels: Object.keys(data),
@@ -15,11 +17,12 @@ const BarChart = ({ data, label, bgColor, borderColor }) => {
       },
     ],
   };
+
   return (
     <div>
-      <Bar data={dataNew} />
+      <Pie data={dataNew} />
     </div>
   );
 };
 
-export default BarChart;
+export default PieChart;

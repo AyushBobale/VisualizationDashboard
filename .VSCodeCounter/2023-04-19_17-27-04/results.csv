@@ -1,0 +1,40 @@
+"filename", "language", "Markdown", "JavaScript JSX", "JavaScript", "CSS", "JSON", "HTML", "comment", "blank", "total"
+"d:\Ayush\datavisual\VisualizationDashboard\README.md", "Markdown", 1, 0, 0, 0, 0, 0, 0, 0, 1
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\README.md", "Markdown", 38, 0, 0, 0, 0, 0, 0, 33, 71
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\package-lock.json", "JSON", 0, 0, 0, 0, 30609, 0, 0, 1, 30610
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\package.json", "JSON", 0, 0, 0, 0, 46, 0, 0, 1, 47
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\public\index.html", "HTML", 0, 0, 0, 0, 0, 22, 23, 1, 46
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\public\manifest.json", "JSON", 0, 0, 0, 0, 25, 0, 0, 1, 26
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\App.jsx", "JavaScript JSX", 0, 26, 0, 0, 0, 0, 0, 4, 30
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Hooks\useD3hook.js", "JavaScript", 0, 0, 10, 0, 0, 0, 0, 4, 14
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Layouts\RootLayout.jsx", "JavaScript JSX", 0, 19, 0, 0, 0, 0, 0, 4, 23
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\Dashboard\Dashboard.css", "CSS", 0, 0, 0, 15, 0, 0, 0, 3, 18
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\Dashboard\Dashboard.jsx", "JavaScript JSX", 0, 126, 0, 0, 0, 0, 2, 11, 139
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\Pages\PageNotFound\PageNotFound.jsx", "JavaScript JSX", 0, 11, 0, 0, 0, 0, 0, 3, 14
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\BarChart\BarChart.jsx", "JavaScript JSX", 0, 77, 0, 0, 0, 0, 0, 11, 88
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Dropdown\Dropdown.css", "CSS", 0, 0, 0, 30, 0, 0, 0, 5, 35
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Dropdown\Dropdown.jsx", "JavaScript JSX", 0, 57, 0, 0, 0, 0, 0, 7, 64
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\LineChart\LineChart.jsx", "JavaScript JSX", 0, 24, 0, 0, 0, 0, 0, 4, 28
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Navbar\Navbar.css", "CSS", 0, 0, 0, 18, 0, 0, 0, 2, 20
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Navbar\Navbar.jsx", "JavaScript JSX", 0, 10, 0, 0, 0, 0, 0, 4, 14
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Sidebar\Sidebar.css", "CSS", 0, 0, 0, 26, 0, 0, 0, 4, 30
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\components\Sidebar\Sidebar.jsx", "JavaScript JSX", 0, 17, 0, 0, 0, 0, 0, 4, 21
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\config.js", "JavaScript", 0, 0, 26, 0, 0, 0, 0, 5, 31
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\index.css", "CSS", 0, 0, 0, 44, 0, 0, 5, 10, 59
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\index.js", "JavaScript", 0, 0, 14, 0, 0, 0, 0, 3, 17
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\redux\slices\dataSlice.js", "JavaScript", 0, 0, 135, 0, 0, 0, 2, 8, 145
+"d:\Ayush\datavisual\VisualizationDashboard\source\client\src\redux\store.js", "JavaScript", 0, 0, 10, 0, 0, 0, 1, 4, 15
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Controllers\dataController.js", "JavaScript", 0, 0, 97, 0, 0, 0, 1, 8, 106
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Middlewares\errorHandlerMiddleware.js", "JavaScript", 0, 0, 13, 0, 0, 0, 0, 3, 16
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Middlewares\errorLoggerMiddleware.js", "JavaScript", 0, 0, 43, 0, 0, 0, 0, 11, 54
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Models\dataModel.js", "JavaScript", 0, 0, 56, 0, 0, 0, 0, 4, 60
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Routes\apiRouter.js", "JavaScript", 0, 0, 5, 0, 0, 0, 0, 3, 8
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Routes\dataRouter.js", "JavaScript", 0, 0, 11, 0, 0, 0, 0, 4, 15
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\Services\dataService.js", "JavaScript", 0, 0, 92, 0, 0, 0, 20, 16, 128
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\config.js", "JavaScript", 0, 0, 4, 0, 0, 0, 0, 1, 5
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\database\connection.js", "JavaScript", 0, 0, 13, 0, 0, 0, 1, 3, 17
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\index.js", "JavaScript", 0, 0, 25, 0, 0, 0, 3, 5, 33
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\jsondata.json", "JSON", 0, 0, 0, 0, 19002, 0, 0, 1, 19003
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\package-lock.json", "JSON", 0, 0, 0, 0, 2121, 0, 0, 1, 2122
+"d:\Ayush\datavisual\VisualizationDashboard\source\server\package.json", "JSON", 0, 0, 0, 0, 22, 0, 0, 1, 23
+"Total", "-", 39, 367, 554, 133, 51825, 22, 58, 198, 53196

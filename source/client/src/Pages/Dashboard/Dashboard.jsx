@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BarChart from "../../components/BarChart/BarChart";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import LineChart from "../../components/LineChart/LineChart";
+import PieChart from "../../components/Piechart/PieChart";
 import { useSearchParams } from "react-router-dom";
 
 function Dashboard() {
@@ -78,11 +79,13 @@ function Dashboard() {
     setSelectedCountry(searchParams.get("country"));
   }, [searchParams]);
 
+  const borderColor = "red";
+  const bgColor = "white";
+
   const formatForYears = (data) => {
     let formattedData = {};
     for (const idx in data) {
       const year = data?.[idx]?.end_year;
-      // console.log(data?.[idx]?.end_year);
       if (formattedData?.[year]) {
         formattedData[year] = formattedData[year] + data?.[idx]?.intensity;
       } else {
@@ -128,7 +131,19 @@ function Dashboard() {
           />
         </div>
       </div>
-      <LineChart data={formatForYears(data)} />
+      <LineChart
+        data={formatForYears(data)}
+        borderColor={borderColor}
+        bgColor={bgColor}
+        label={"Line Chart"}
+      />
+      <BarChart
+        data={formatForYears(data)}
+        borderColor={bgColor}
+        bgColor={borderColor}
+        label={"Bar Chart"}
+      />
+      {/* <PieChart data={formatForYears(data)}  borderColor={borderColor} bgColor={bgColor} label={"Line Chart"}/> */}
       {data?.map?.((elm) => {
         return <p>{elm?.title}</p>;
       })}
