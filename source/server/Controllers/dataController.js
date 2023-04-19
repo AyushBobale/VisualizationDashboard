@@ -49,10 +49,13 @@ const addInitialDataController = async (data) => {
 const getAllSortedDataController = async (req, res, next) => {
   try {
     let filter = {};
+    // console.log(req.body);
+    let data;
     if (req.body?.sortParam) {
       filter[req.body?.sortParam] = req.body?.sortValue;
     }
-    const data = await getSortedDataService(filter, req.body?.filter);
+    data = await getSortedDataService(filter, req.body?.filter);
+
     if (data) {
       res.status(200).json({
         type: STATUS.SUCCESS,

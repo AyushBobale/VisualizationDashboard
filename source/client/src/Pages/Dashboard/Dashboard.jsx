@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BarChart from "../../components/BarChart/BarChart";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import LineChart from "../../components/LineChart/LineChart";
 import { useSearchParams } from "react-router-dom";
 
 function Dashboard() {
@@ -26,7 +27,7 @@ function Dashboard() {
     },
     {
       value: "End year",
-      key: "end_year",
+      key: "end_year_from",
     },
     ,
   ];
@@ -39,12 +40,18 @@ function Dashboard() {
         sortValue: searchParams.get("sortValue")
           ? searchParams.get("sortValue")
           : undefined,
+        end_year_from: searchParams.get("end_year_from")
+          ? searchParams.get("end_year_from")
+          : undefined,
+        end_year_to: searchParams.get("end_year_to")
+          ? searchParams.get("end_year_to")
+          : undefined,
         filter: {
-          end_year: searchParams.get("end_year")
-            ? searchParams.get("end_year")
-            : undefined,
           country: searchParams.get("country")
             ? searchParams.get("country")
+            : undefined,
+          end_year: searchParams.get("end_year_from")
+            ? searchParams.get("end_year_from")
             : undefined,
         },
       })
@@ -55,7 +62,10 @@ function Dashboard() {
 
   // drop down
   const [selectdSortParam, setSelectedSortParam] = useState();
-  const [selectedEndYear, setSelectedEndYear] = useState(
+  const [selectedEndYearFrom, setSelectedEndYearFrom] = useState(
+    distinct?.end_year?.[0]
+  );
+  const [selectedEndYearTo, setSelectedEndYearTo] = useState(
     distinct?.end_year?.[0]
   );
   const [selectedCountry, setSelectedCountry] = useState(
@@ -63,9 +73,20 @@ function Dashboard() {
   );
 
   useEffect(() => {
-    setSelectedEndYear(searchParams.get("end_year"));
+    setSelectedEndYearFrom(searchParams.get("end_year_from"));
+    setSelectedEndYearTo(searchParams.get("end_year_to"));
     setSelectedCountry(searchParams.get("country"));
   }, [searchParams]);
+
+  const formatForYears = (data) => {
+    let formattedData = {};
+    for (const idx in data) {
+      formattedData[idx] = data?.[idx]?.intensity;
+    }
+    return formattedData;
+  };
+
+  // console.log(formatForYears(data));
 
   return (
     <div className="dash-container">
@@ -82,14 +103,16 @@ function Dashboard() {
       </div>
       <div className="drop-down-root-cont">
         <div className="drop-down-cont">
+          End year
           <Dropdown
-            paramName={"end_year"}
+            paramName={"end_year_from"}
             options={distinct?.end_year}
-            selectedOption={selectedEndYear}
-            onSelectedOptionChange={setSelectedEndYear}
+            selectedOption={selectedEndYearFrom}
+            onSelectedOptionChange={setSelectedEndYearFrom}
           />
         </div>
         <div className="drop-down-cont">
+          Country
           <Dropdown
             paramName={"country"}
             options={distinct?.country}
@@ -98,6 +121,7 @@ function Dashboard() {
           />
         </div>
       </div>
+      <LineChart data={formatForYears(data)} />
       {data?.map?.((elm) => {
         return <p>{elm?.title}</p>;
       })}
