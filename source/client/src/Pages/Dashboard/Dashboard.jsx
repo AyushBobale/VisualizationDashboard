@@ -13,6 +13,7 @@ import BarChart from "../../components/BarChart/BarChart";
 import BarChartMultiple from "../../components/BarChart/BarChartMultiple";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import LineChart from "../../components/LineChart/LineChart";
+import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
 
 function Dashboard() {
@@ -254,6 +255,16 @@ function Dashboard() {
         </div>
         <div className="bar2">
           <BarChartMultiple
+            data={formatedSortParamVsAll(data, selectdSortParam?.key)}
+            keys={attributes}
+            borderColor={[]}
+            bgColor={[]}
+            label={[`${"temp"} Sum`]}
+            title={`${"temp"} Sum per year`}
+          />
+        </div>
+        <div className="line2">
+          <LineChartMultiple
             data={formatedSortParamVsAll(data, selectdSortParam?.key)}
             keys={attributes}
             borderColor={[]}

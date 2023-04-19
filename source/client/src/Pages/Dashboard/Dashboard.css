@@ -18,7 +18,7 @@
 
 .charts-grid {
   display: grid;
-  grid-template-areas: "var var" "line1 bar1" "bar2 bar2";
+  grid-template-areas: "var var" "line1 bar1" "bar2 bar2" "line2 line2";
   grid-template-columns: 1fr 1fr;
 }
 
@@ -29,6 +29,11 @@
 
 .line1 {
   grid-area: line1;
+  width: 100%;
+}
+
+.line2 {
+  grid-area: line2;
   width: 100%;
 }
 

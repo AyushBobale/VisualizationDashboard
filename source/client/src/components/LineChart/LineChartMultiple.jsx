@@ -1,15 +1,8 @@
-import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import { Line } from "react-chartjs-2";
 import React from "react";
 
-const BarChartMultiple = ({
-  data,
-  label,
-  bgColor,
-  borderColor,
-  title,
-  keys,
-}) => {
+function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
   const options = {
     responsive: true,
     plugins: {
@@ -22,6 +15,7 @@ const BarChartMultiple = ({
       },
     },
   };
+
   const dataNew = {
     labels: Object.keys(data),
     datasets: keys?.map((elm, idx) => {
@@ -35,9 +29,9 @@ const BarChartMultiple = ({
   };
   return (
     <div>
-      <Bar data={dataNew} options={options} />
+      <Line data={dataNew} options={options} />
     </div>
   );
-};
+}
 
-export default BarChartMultiple;
+export default LineChartMultiple;
