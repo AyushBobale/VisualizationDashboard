@@ -30,6 +30,15 @@
   background-color: var(--primary);
 }
 
+.elivate-shadow {
+  cursor: pointer;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.elivate-shadow:hover {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}
+
 /* scroll bar */
 /* Track */
 ::-webkit-scrollbar-track {

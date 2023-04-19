@@ -29,7 +29,10 @@ const Dropdown = ({
 
   return (
     <div className="dropdown">
-      <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className="dropdown-header elivate-shadow"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {selectedOption
           ? selectedOption?.value
             ? selectedOption?.value

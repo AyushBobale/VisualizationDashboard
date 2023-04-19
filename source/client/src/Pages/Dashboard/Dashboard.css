@@ -15,3 +15,24 @@
 .drop-down-cont {
   width: 100%;
 }
+
+.charts-grid {
+  display: grid;
+  grid-template-areas: "line1 bar1" "bar2 bar2";
+  grid-template-columns: 1fr 1fr;
+}
+
+.line1 {
+  grid-area: line1;
+  width: 100%;
+}
+
+.bar1 {
+  grid-area: bar1;
+  width: 100%;
+}
+
+.bar2 {
+  grid-area: bar2;
+  width: 100%;
+}

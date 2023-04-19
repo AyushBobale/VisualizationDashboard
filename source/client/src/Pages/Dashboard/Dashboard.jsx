@@ -79,24 +79,26 @@ function Dashboard() {
     setSelectedCountry(searchParams.get("country"));
   }, [searchParams]);
 
-  const borderColor = "red";
+  const borderColor = "rgba(255, 130, 130, 0.5)";
   const bgColor = "white";
 
-  const formatForYears = (data) => {
+  const formatedSortParamVsDataParamSum = (data, sortParam, dataParam) => {
     let formattedData = {};
     for (const idx in data) {
-      const year = data?.[idx]?.end_year;
+      const year = data?.[idx]?.[sortParam || "end_year"];
       if (formattedData?.[year]) {
-        formattedData[year] = formattedData[year] + data?.[idx]?.intensity;
+        formattedData[year] =
+          formattedData[year] + data?.[idx]?.[dataParam || "intensity"];
       } else {
-        formattedData[year] = data?.[idx]?.intensity;
+        formattedData[year] = data?.[idx]?.[dataParam || "intensity"];
       }
     }
     delete formattedData[null];
     return formattedData;
   };
 
-  // console.log(formatForYears(data));
+  const [chartSortParam, setChartSortParam] = useState("end_year");
+  const [chartDataParam, setChartDataParam] = useState("relevance");
 
   return (
     <div className="dash-container">
@@ -131,19 +133,48 @@ function Dashboard() {
           />
         </div>
       </div>
-      <LineChart
-        data={formatForYears(data)}
-        borderColor={borderColor}
-        bgColor={bgColor}
-        label={"Line Chart"}
-      />
-      <BarChart
-        data={formatForYears(data)}
-        borderColor={bgColor}
-        bgColor={borderColor}
-        label={"Bar Chart"}
-      />
-      {/* <PieChart data={formatForYears(data)}  borderColor={borderColor} bgColor={bgColor} label={"Line Chart"}/> */}
+      <div className="charts-grid">
+        <div className="line1">
+          <LineChart
+            data={formatedSortParamVsDataParamSum(
+              data,
+              chartSortParam,
+              chartDataParam
+            )}
+            borderColor={borderColor}
+            bgColor={bgColor}
+            label={`${chartDataParam} Sum`}
+            title={`${chartDataParam} Sum per year`}
+          />
+        </div>
+        <div className="bar1">
+          <BarChart
+            data={formatedSortParamVsDataParamSum(
+              data,
+              chartSortParam,
+              chartDataParam
+            )}
+            borderColor={bgColor}
+            bgColor={borderColor}
+            label={[`${chartDataParam} Sum`]}
+            title={`${chartDataParam} Sum per year`}
+          />
+        </div>
+        <div className="bar2">
+          <BarChart
+            data={formatedSortParamVsDataParamSum(
+              data,
+              chartSortParam,
+              chartDataParam
+            )}
+            borderColor={bgColor}
+            bgColor={borderColor}
+            label={[`${chartSortParam} Sum`]}
+            title={`${chartSortParam} Sum per year`}
+          />
+        </div>
+      </div>
+      {/* <PieChart data={formatedSortParamVsDataParamSum(data, chartSortParam "intensity")}  borderColor={borderColor} bgColor={bgColor} label={"Line Chart"}/> */}
       {data?.map?.((elm) => {
         return <p>{elm?.title}</p>;
       })}

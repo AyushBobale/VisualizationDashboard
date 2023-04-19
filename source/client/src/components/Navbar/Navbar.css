@@ -4,14 +4,16 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   display: flex;
   padding: 1rem;
   align-items: center;
   justify-content: flex-start;
+  backdrop-filter: blur(2px);
 }
 
 .navbar-inner {
+  background-color: var(--primary);
   border-radius: 6px;
   border: 1px solid var(--primary-border);
   padding: 1rem;

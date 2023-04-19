@@ -2,7 +2,7 @@ import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import React from "react";
 
-const BarChart = ({ data, label, bgColor, borderColor, title }) => {
+const BarChartMultiple = ({ data, label, bgColor, borderColor, title }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -33,4 +33,4 @@ const BarChart = ({ data, label, bgColor, borderColor, title }) => {
   );
 };
 
-export default BarChart;
+export default BarChartMultiple;

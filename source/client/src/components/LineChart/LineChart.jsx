@@ -2,9 +2,19 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import React from "react";
 
-function LineChart({ data, label, bgColor, borderColor }) {
-  const labels = ["January", "February", "March", "April", "May", "June"];
-  console.log(Object.values(data));
+function LineChart({ data, label, bgColor, borderColor, title }) {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: title,
+      },
+    },
+  };
 
   const dataTemp = {
     labels: Object.keys(data),
@@ -19,7 +29,7 @@ function LineChart({ data, label, bgColor, borderColor }) {
   };
   return (
     <div>
-      <Line data={dataTemp} />
+      <Line data={dataTemp} options={options} />
     </div>
   );
 }
