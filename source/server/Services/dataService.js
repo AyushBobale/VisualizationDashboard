@@ -20,7 +20,7 @@ const addInitialService = async (data) => {
 };
 
 const getSortedDataService = async (data, filter, rangeFilters) => {
-  console.log(...rangeFilters);
+  console.log([filter ? filter : {}, ...rangeFilters]);
   return DataModel.find({
     $and: [
       filter ? filter : {},

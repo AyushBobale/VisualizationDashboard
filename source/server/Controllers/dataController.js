@@ -66,18 +66,19 @@ const getAllSortedDataController = async (req, res, next) => {
       sorting[req.body?.sortParam] = req.body?.sortValue;
     }
     // setting from to filter
+    // make checks here for date
     if (req.body?.from_data) {
       let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $gte: req.body?.from_data };
+      oneFilter[req.body?.sortParam] = { $gte: parseInt(req.body?.from_data) };
       filter.push(oneFilter);
     }
     if (req.body?.to_data) {
       let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $lte: req.body?.to_data };
+      oneFilter[req.body?.sortParam] = { $lte: parseInt(req.body?.to_data) };
       filter.push(oneFilter);
     }
 
-    console.log(req.body?.filter);
+    // console.log(req.body?.filter, filter);
 
     data = await getSortedDataService(sorting, req.body?.filter, filter);
 

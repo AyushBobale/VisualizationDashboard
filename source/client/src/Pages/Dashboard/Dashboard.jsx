@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import BarChart from "../../components/BarChart/BarChart";
+import BarChartMultiple from "../../components/BarChart/BarChartMultiple";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import LineChart from "../../components/LineChart/LineChart";
 import PieChart from "../../components/Piechart/PieChart";
@@ -37,10 +38,26 @@ function Dashboard() {
     {
       value: "Relevance",
       key: "relevance",
+      borderColor: "rgba(255,110,110,0.5)",
+      backGroundColor: "rgba(255,110,110,1)",
     },
     {
       value: "Intensity",
       key: "intensity",
+      borderColor: "rgba(110,255,110,0.5)",
+      backGroundColor: "rgba(110,255,110,1)",
+    },
+    {
+      value: "Impact",
+      key: "impact",
+      borderColor: "rgba(110,110,255,0.5)",
+      backGroundColor: "rgba(110,110,255,1)",
+    },
+    {
+      value: "Likelihood",
+      key: "likelihood",
+      borderColor: "rgba(255,255,110,0.5)",
+      backGroundColor: "rgba(255,255,110,1)",
     },
   ];
 
@@ -76,7 +93,7 @@ function Dashboard() {
 
   // drop down
   //sorting params
-  const [selectdSortParam, setSelectedSortParam] = useState();
+  const [selectdSortParam, setSelectedSortParam] = useState(options[0]);
   const [selectdSortDirecton, setSelectedSortDirection] = useState();
   const [selectdSortFrom, setSelectedSortFrom] = useState();
   const [selectdSortTo, setSelectedSortTo] = useState();
@@ -94,9 +111,13 @@ function Dashboard() {
     setSelectedCountry(searchParams.get("country"));
     setSelectedSortFrom(searchParams.get("from_data"));
     setSelectedSortTo(searchParams.get("to_data"));
-    setSelectedSortParam(
-      options?.filter((elm) => elm.key == searchParams.get("sortParam"))?.[0]
-    );
+    if (searchParams.get("sortParam")) {
+      setSelectedSortParam(
+        options?.filter((elm) => elm.key == searchParams.get("sortParam"))?.[0]
+      );
+    } else {
+      setSelectedSortParam(options[0]);
+    }
   }, [searchParams]);
 
   // this useeffect is used to set the sortValue onchnage of sort Param
@@ -119,19 +140,38 @@ function Dashboard() {
   const formatedSortParamVsDataParamSum = (data, sortParam, dataParam) => {
     let formattedData = {};
     for (const idx in data) {
-      const year = data?.[idx]?.[sortParam || "end_year"];
+      const year = data?.[idx]?.[sortParam];
       if (formattedData?.[year]) {
-        formattedData[year] =
-          formattedData[year] + data?.[idx]?.[dataParam || "intensity"];
+        formattedData[year] = formattedData[year] + data?.[idx]?.[dataParam];
       } else {
-        formattedData[year] = data?.[idx]?.[dataParam || "intensity"];
+        formattedData[year] = data?.[idx]?.[dataParam];
       }
     }
     delete formattedData[null];
     return formattedData;
   };
 
-  const [chartSortParam, setChartSortParam] = useState("end_year");
+  const formatedSortParamVsAll = (data, sortParam) => {
+    let formattedData = {};
+    for (const idx in data) {
+      const key = data?.[idx]?.[sortParam];
+      if (formattedData?.[key]) {
+        for (const value of attributes) {
+          formattedData[key][value?.key] =
+            formattedData[key][value?.key] + data?.[idx]?.[value?.key];
+        }
+      } else {
+        formattedData[key] = {};
+        for (const value of attributes) {
+          formattedData[key][value?.key] = data?.[idx]?.[value?.key]
+            ? data?.[idx]?.[value?.key]
+            : 0;
+        }
+      }
+    }
+    delete formattedData[null];
+    return formattedData;
+  };
 
   return (
     <div className="dash-container">
@@ -166,15 +206,6 @@ function Dashboard() {
         </div>
       </div>
       <div className="drop-down-root-cont">
-        {/* <div className="drop-down-cont">
-          End year
-          <Dropdown
-            paramName={"end_year_from"}
-            options={distinct?.end_year}
-            selectedOption={selectedEndYearFrom}
-            onSelectedOptionChange={setSelectedEndYearFrom}
-          />
-        </div> */}
         <div className="drop-down-cont">
           Country
           <Dropdown
@@ -199,7 +230,7 @@ function Dashboard() {
           <LineChart
             data={formatedSortParamVsDataParamSum(
               data,
-              chartSortParam,
+              selectdSortParam?.key,
               selectedAttribute?.key
             )}
             borderColor={borderColor}
@@ -212,7 +243,7 @@ function Dashboard() {
           <BarChart
             data={formatedSortParamVsDataParamSum(
               data,
-              chartSortParam,
+              selectdSortParam?.key,
               selectedAttribute?.key
             )}
             borderColor={bgColor}
@@ -222,16 +253,13 @@ function Dashboard() {
           />
         </div>
         <div className="bar2">
-          <BarChart
-            data={formatedSortParamVsDataParamSum(
-              data,
-              chartSortParam,
-              selectedAttribute?.value
-            )}
-            borderColor={bgColor}
-            bgColor={borderColor}
-            label={[`${chartSortParam} Sum`]}
-            title={`${chartSortParam} Sum per year`}
+          <BarChartMultiple
+            data={formatedSortParamVsAll(data, selectdSortParam?.key)}
+            keys={attributes}
+            borderColor={[]}
+            bgColor={[]}
+            label={[`${"temp"} Sum`]}
+            title={`${"temp"} Sum per year`}
           />
         </div>
       </div>
