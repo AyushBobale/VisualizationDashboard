@@ -2,3 +2,13 @@
   background-color: var(--primary);
   padding: 2rem;
 }
+
+.drop-down-root-cont {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.drop-down-cont {
+  width: 100%;
+}

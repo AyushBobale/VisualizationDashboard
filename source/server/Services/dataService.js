@@ -19,8 +19,8 @@ const addInitialService = async (data) => {
   }
 };
 
-const getSortedDataService = async (data) => {
-  return DataModel.find({}).sort(data);
+const getSortedDataService = async (data, filter) => {
+  return DataModel.find(filter ? filter : {}).sort(data);
 };
 
 const getDistinctElemService = async (data) => {

@@ -23,33 +23,59 @@ function Dashboard() {
   useEffect(() => {
     dispatch(
       getAllSortedDataThunk({
-        sortParam: searchParams.get("sortParam"),
-        sortValue: searchParams.get("sortValue"),
+        sortParam: searchParams.get("sortParam")
+          ? searchParams.get("sortParam")
+          : undefined,
+        sortValue: searchParams.get("sortValue")
+          ? searchParams.get("sortValue")
+          : undefined,
+        filter: {
+          end_year: searchParams.get("end_year")
+            ? searchParams.get("end_year")
+            : undefined,
+          country: searchParams.get("country")
+            ? searchParams.get("country")
+            : undefined,
+        },
       })
     );
 
     dispatch(getAllDistinctDataThunk());
-  }, []);
+  }, [searchParams]);
 
   // drop down
-  const [selectedOption, setSelectedOption] = useState(distinct?.end_year?.[0]);
-  useEffect(() => {
-    setSelectedOption(distinct?.end_year?.[0]);
-  }, [distinct]);
+  const [selectedEndYear, setSelectedEndYear] = useState(
+    distinct?.end_year?.[0]
+  );
+  const [selectedCountry, setSelectedCountry] = useState(
+    distinct?.country?.[0]
+  );
 
-  const handleSelectedOptionChange = (option) => {
-    setSelectedOption(option);
-  };
+  useEffect(() => {
+    setSelectedEndYear(distinct?.end_year?.[0]);
+    setSelectedCountry(distinct?.country?.[0]);
+  }, [distinct]);
 
   return (
     <div className="dash-container">
       Dashboard
-      <div>
-        <Dropdown
-          options={distinct?.end_year}
-          selectedOption={selectedOption}
-          onSelectedOptionChange={handleSelectedOptionChange}
-        />
+      <div className="drop-down-root-cont">
+        <div className="drop-down-cont">
+          <Dropdown
+            paramName={"end_year"}
+            options={distinct?.end_year}
+            selectedOption={selectedEndYear}
+            onSelectedOptionChange={setSelectedEndYear}
+          />
+        </div>
+        <div className="drop-down-cont">
+          <Dropdown
+            paramName={"country"}
+            options={distinct?.country}
+            selectedOption={selectedCountry}
+            onSelectedOptionChange={setSelectedCountry}
+          />
+        </div>
       </div>
       {data?.map?.((elm) => {
         return <p>{elm?.title}</p>;

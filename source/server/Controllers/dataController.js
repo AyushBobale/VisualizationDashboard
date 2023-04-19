@@ -52,7 +52,7 @@ const getAllSortedDataController = async (req, res, next) => {
     if (req.body?.sortParam) {
       filter[req.body?.sortParam] = req.body?.sortValue;
     }
-    const data = await getSortedDataService(filter);
+    const data = await getSortedDataService(filter, req.body?.filter);
     if (data) {
       res.status(200).json({
         type: STATUS.SUCCESS,

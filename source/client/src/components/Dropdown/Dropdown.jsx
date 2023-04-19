@@ -1,12 +1,28 @@
 import "./Dropdown.css";
 
 import React, { useState } from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
 
-const Dropdown = ({ options, selectedOption, onSelectedOptionChange }) => {
+const Dropdown = ({
+  options,
+  selectedOption,
+  onSelectedOptionChange,
+  paramName,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleOptionClick = (option) => {
+    const params = Object.fromEntries(searchParams);
+    params[paramName] = option;
+    setSearchParams(createSearchParams(params));
     onSelectedOptionChange?.(option);
+    setIsOpen(false);
+  };
+
+  const handleReset = () => {
+    searchParams.delete(paramName);
+    setSearchParams(searchParams);
     setIsOpen(false);
   };
 
@@ -17,6 +33,13 @@ const Dropdown = ({ options, selectedOption, onSelectedOptionChange }) => {
       </div>
       {isOpen && (
         <div className="dropdown-options">
+          <div
+            key={"reset"}
+            className="dropdown-option"
+            onClick={() => handleReset()}
+          >
+            Reset
+          </div>
           {options?.map((option) => (
             <div
               key={option}
