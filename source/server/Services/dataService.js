@@ -26,10 +26,76 @@ const getSortedDataService = async (data) => {
 const getDistinctElemService = async (data) => {
   const end_year = await DataModel.distinct(
     "end_year",
-    { end_year: { $ne: null } },
+    { end_year: { $nin: [null, ""] } },
     { end_year: 1 }
   );
-  return { end_year: end_year?.sort() };
+
+  const start_year = await DataModel.distinct(
+    "start_year",
+    { start_year: { $nin: [null, ""] } },
+    { start_year: 1 }
+  );
+
+  const added = await DataModel.distinct(
+    "added",
+    { added: { $nin: [null, ""] } },
+    { added: 1 }
+  );
+
+  const published = await DataModel.distinct(
+    "published",
+    { published: { $nin: [null, ""] } },
+    { published: 1 }
+  );
+
+  const topic = await DataModel.distinct(
+    "topic",
+    { topic: { $nin: [null, ""] } },
+    { topic: 1 }
+  );
+
+  const sector = await DataModel.distinct(
+    "sector",
+    { sector: { $nin: [null, ""] } },
+    { sector: 1 }
+  );
+
+  const region = await DataModel.distinct(
+    "region",
+    { region: { $nin: [null, ""] } },
+    { region: 1 }
+  );
+
+  const pestle = await DataModel.distinct(
+    "pestle",
+    { pestle: { $nin: [null, ""] } },
+    { pestle: 1 }
+  );
+
+  const source = await DataModel.distinct(
+    "source",
+    { source: { $nin: [null, ""] } },
+    { source: 1 }
+  );
+
+  const country = await DataModel.distinct(
+    "country",
+    { country: { $nin: [null, ""] } },
+    { country: 1 }
+  );
+
+  return {
+    end_year: end_year?.sort(),
+    start_year: start_year?.sort(),
+    // added: added?.sort(),
+    // published: published?.sort(),
+    topic: topic?.sort(),
+    sector: sector?.sort(),
+    region: region?.sort(),
+    pestle: pestle?.sort(),
+    source: source?.sort(),
+    country: country?.sort(),
+  };
 };
 
 export {
