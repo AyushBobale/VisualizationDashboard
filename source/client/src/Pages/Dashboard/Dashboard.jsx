@@ -92,6 +92,11 @@ function Dashboard() {
     setSearchParams(createSearchParams(params));
     setSelectedSortDirection(1);
     setSortOptions(distinct?.[searchParams.get("sortParam")]);
+    if (!searchParams.get("sortParam")) {
+      searchParams.delete("from_data");
+      searchParams.delete("to_data");
+      searchParams.delete("sortValue");
+    }
   }, [searchParams.get("sortParam"), distinct]);
 
   console.log(sortOptions);
