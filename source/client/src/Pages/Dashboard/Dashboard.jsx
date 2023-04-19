@@ -63,9 +63,9 @@ function Dashboard() {
   );
 
   useEffect(() => {
-    setSelectedEndYear(distinct?.end_year?.[0]);
-    setSelectedCountry(distinct?.country?.[0]);
-  }, [distinct]);
+    setSelectedEndYear(searchParams.get("end_year"));
+    setSelectedCountry(searchParams.get("country"));
+  }, [searchParams]);
 
   return (
     <div className="dash-container">

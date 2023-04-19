@@ -23,13 +23,18 @@ const Dropdown = ({
   const handleReset = () => {
     searchParams.delete(paramName);
     setSearchParams(searchParams);
+    onSelectedOptionChange?.("");
     setIsOpen(false);
   };
 
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
-        {selectedOption?.value ? selectedOption?.value : selectedOption}
+        {selectedOption
+          ? selectedOption?.value
+            ? selectedOption?.value
+            : selectedOption
+          : "None selected"}
       </div>
       {isOpen && (
         <div className="dropdown-options">
