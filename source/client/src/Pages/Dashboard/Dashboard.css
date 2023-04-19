@@ -18,8 +18,18 @@
 
 .charts-grid {
   display: grid;
+  gap: 1rem;
   grid-template-areas: "var var var" "line1 line1 bar2" "bar1 bar1 bar2" "line2 line2 line2";
   grid-template-columns: 1fr 1fr 4fr;
+}
+
+.chart-container {
+  border: 1px solid var(--primary-border);
+  border-radius: 6px;
+}
+
+.chart-container > div {
+  margin: 1rem;
 }
 
 .var-select {

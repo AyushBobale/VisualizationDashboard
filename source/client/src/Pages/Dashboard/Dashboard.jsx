@@ -231,7 +231,7 @@ function Dashboard() {
             onSelectedOptionChange={setSelectedAttribute}
           />
         </div>
-        <div className="line1">
+        <div className="line1 chart-container elivate-shadow">
           <LineChart
             data={formatedSortParamVsDataParamSum(
               data,
@@ -252,7 +252,7 @@ function Dashboard() {
             title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
-        <div className="bar1">
+        <div className="bar1 chart-container elivate-shadow">
           <BarChart
             data={formatedSortParamVsDataParamSum(
               data,
@@ -273,24 +273,24 @@ function Dashboard() {
             title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
-        <div className="bar2">
+        <div className="bar2 chart-container elivate-shadow">
           <BarChartMultiple
             data={formatedSortParamVsAll(data, selectdSortParam?.key)}
             keys={attributes}
             borderColor={[]}
             bgColor={[]}
             label={[`${"temp"} Sum`]}
-            title={`${"temp"} Sum per year`}
+            title={`Combined Sum per year`}
           />
         </div>
-        <div className="line2">
+        <div className="line2 chart-container elivate-shadow">
           <LineChartMultiple
             data={formatedSortParamVsAll(data, selectdSortParam?.key)}
             keys={attributes}
             borderColor={[]}
             bgColor={[]}
-            label={[`${"temp"} Sum`]}
-            title={`${"temp"} Sum per year`}
+            label={[`Combined Sum`]}
+            title={`Combined Sum per year`}
           />
         </div>
       </div>

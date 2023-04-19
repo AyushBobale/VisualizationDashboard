@@ -7,7 +7,7 @@ const BarChart = ({ data, label, bgColor, borderColor, title }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false,
       },
       title: {
         display: true,
