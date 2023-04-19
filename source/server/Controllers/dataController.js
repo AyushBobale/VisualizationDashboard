@@ -8,7 +8,14 @@ import {
 import DataModel from "../Models/dataModel.js";
 import { STATUS } from "../config.js";
 
+/**
+ * This function is deprecated and should not be used anymore.
+ * @deprecated
+ */
 const getAllDataController = async (req, res, next) => {
+  console.warn(
+    "getAllDataController() function is deprecated. Use getAllSortedDataController() instead."
+  );
   try {
     const data = await getAllDataService();
     if (data) {
@@ -48,13 +55,31 @@ const addInitialDataController = async (data) => {
 
 const getAllSortedDataController = async (req, res, next) => {
   try {
-    let filter = {};
+    let sorting = {};
+    let filter = [];
     // console.log(req.body);
     let data;
     if (req.body?.sortParam) {
-      filter[req.body?.sortParam] = req.body?.sortValue;
+      sorting[req.body?.sortParam] = parseInt(req.body?.sortValue || "1");
     }
-    data = await getSortedDataService(filter, req.body?.filter);
+    if (req.body?.sortParam) {
+      sorting[req.body?.sortParam] = req.body?.sortValue;
+    }
+    // setting from to filter
+    if (req.body?.from_data) {
+      let oneFilter = {};
+      oneFilter[req.body?.sortParam] = { $gte: req.body?.from_data };
+      filter.push(oneFilter);
+    }
+    if (req.body?.to_data) {
+      let oneFilter = {};
+      oneFilter[req.body?.sortParam] = { $lte: req.body?.to_data };
+      filter.push(oneFilter);
+    }
+
+    console.log(req.body?.filter);
+
+    data = await getSortedDataService(sorting, req.body?.filter, filter);
 
     if (data) {
       res.status(200).json({

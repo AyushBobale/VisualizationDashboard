@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 
 import React, { useEffect, useState } from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
 import {
   getAllDataThunk,
   getAllDistinctDataThunk,
@@ -12,7 +13,6 @@ import BarChart from "../../components/BarChart/BarChart";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import LineChart from "../../components/LineChart/LineChart";
 import PieChart from "../../components/Piechart/PieChart";
-import { useSearchParams } from "react-router-dom";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function Dashboard() {
     },
     {
       value: "End year",
-      key: "end_year_from",
+      key: "end_year",
     },
     ,
   ];
@@ -41,12 +41,13 @@ function Dashboard() {
         sortValue: searchParams.get("sortValue")
           ? searchParams.get("sortValue")
           : undefined,
-        end_year_from: searchParams.get("end_year_from")
-          ? searchParams.get("end_year_from")
+        from_data: searchParams.get("from_data")
+          ? searchParams.get("from_data")
           : undefined,
-        end_year_to: searchParams.get("end_year_to")
-          ? searchParams.get("end_year_to")
+        to_data: searchParams.get("to_data")
+          ? searchParams.get("to_data")
           : undefined,
+
         filter: {
           country: searchParams.get("country")
             ? searchParams.get("country")
@@ -62,22 +63,38 @@ function Dashboard() {
   }, [searchParams]);
 
   // drop down
+  //sorting params
   const [selectdSortParam, setSelectedSortParam] = useState();
-  const [selectedEndYearFrom, setSelectedEndYearFrom] = useState(
-    distinct?.end_year?.[0]
-  );
-  const [selectedEndYearTo, setSelectedEndYearTo] = useState(
-    distinct?.end_year?.[0]
-  );
+  const [selectdSortDirecton, setSelectedSortDirection] = useState();
+  const [selectdSortFrom, setSelectedSortFrom] = useState();
+  const [selectdSortTo, setSelectedSortTo] = useState();
+  const [sortOptions, setSortOptions] = useState([]);
+
+  // lower tabs
   const [selectedCountry, setSelectedCountry] = useState(
     distinct?.country?.[0]
   );
 
+  // this use effect is used to refelect the changes from link to state vars
   useEffect(() => {
-    setSelectedEndYearFrom(searchParams.get("end_year_from"));
-    setSelectedEndYearTo(searchParams.get("end_year_to"));
     setSelectedCountry(searchParams.get("country"));
+    setSelectedSortFrom(searchParams.get("from_data"));
+    setSelectedSortTo(searchParams.get("to_data"));
+    setSelectedSortParam(
+      options?.filter((elm) => elm.key == searchParams.get("sortParam"))?.[0]
+    );
   }, [searchParams]);
+
+  // this useeffect is used to set the sortValue onchnage of sort Param
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams);
+    params["sortValue"] = 1;
+    setSearchParams(createSearchParams(params));
+    setSelectedSortDirection(1);
+    setSortOptions(distinct?.[searchParams.get("sortParam")]);
+  }, [searchParams.get("sortParam"), distinct]);
+
+  console.log(sortOptions);
 
   const borderColor = "rgba(255, 130, 130, 0.5)";
   const bgColor = "white";
@@ -105,6 +122,7 @@ function Dashboard() {
       Dashboard
       <div className="drop-down-root-cont">
         <div className="drop-down-cont">
+          Search By
           <Dropdown
             paramName={"sortParam"}
             options={options}
@@ -112,9 +130,27 @@ function Dashboard() {
             onSelectedOptionChange={setSelectedSortParam}
           />
         </div>
+        <div className="drop-down-cont">
+          From
+          <Dropdown
+            paramName={"from_data"}
+            options={sortOptions}
+            selectedOption={selectdSortFrom}
+            onSelectedOptionChange={setSelectedSortFrom}
+          />
+        </div>
+        <div className="drop-down-cont">
+          To
+          <Dropdown
+            paramName={"to_data"}
+            options={sortOptions}
+            selectedOption={selectdSortTo}
+            onSelectedOptionChange={setSelectedSortTo}
+          />
+        </div>
       </div>
       <div className="drop-down-root-cont">
-        <div className="drop-down-cont">
+        {/* <div className="drop-down-cont">
           End year
           <Dropdown
             paramName={"end_year_from"}
@@ -122,7 +158,7 @@ function Dashboard() {
             selectedOption={selectedEndYearFrom}
             onSelectedOptionChange={setSelectedEndYearFrom}
           />
-        </div>
+        </div> */}
         <div className="drop-down-cont">
           Country
           <Dropdown

@@ -19,10 +19,12 @@ const addInitialService = async (data) => {
   }
 };
 
-const getSortedDataService = async (data, filter) => {
+const getSortedDataService = async (data, filter, rangeFilters) => {
+  console.log(...rangeFilters);
   return DataModel.find({
     $and: [
       filter ? filter : {},
+      ...rangeFilters,
       // { end_year: { $nin: ["", null] } },
       // { intensity: { $nin: ["", null] } },
       // { sector: { $nin: ["", null] } },
