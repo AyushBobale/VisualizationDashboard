@@ -57,7 +57,9 @@ const getAllSortedDataController = async (req, res, next) => {
   try {
     let sorting = {};
     let filter = [];
-    // console.log(req.body);
+    let orAndFilter = {};
+
+    // Settig sort param
     let data;
     if (req.body?.sortParam) {
       sorting[req.body?.sortParam] = parseInt(req.body?.sortValue || "1");
@@ -65,6 +67,7 @@ const getAllSortedDataController = async (req, res, next) => {
     if (req.body?.sortParam) {
       sorting[req.body?.sortParam] = req.body?.sortValue;
     }
+
     // setting from to filter
     // make checks here for date
     if (req.body?.from_data) {
@@ -78,9 +81,28 @@ const getAllSortedDataController = async (req, res, next) => {
       filter.push(oneFilter);
     }
 
-    // console.log(req.body?.filter, filter);
+    // setting up or and filter
+    if (parseInt(req.body?.orAndFilter)) {
+      orAndFilter["$or"] = [];
+      for (const key of Object.keys(req.body?.filter)) {
+        let onFilter = { [key]: req.body?.filter?.[key] };
+        orAndFilter["$or"].push(onFilter);
+      }
+      if (!orAndFilter["$or"]?.length) {
+        delete orAndFilter["$or"];
+      }
+    } else {
+      orAndFilter["$and"] = [];
+      for (const key of Object.keys(req.body?.filter)) {
+        let onFilter = { [key]: req.body?.filter?.[key] };
+        orAndFilter["$and"].push(onFilter);
+      }
+      if (!orAndFilter["$and"]?.length) {
+        delete orAndFilter["$and"];
+      }
+    }
 
-    data = await getSortedDataService(sorting, req.body?.filter, filter);
+    data = await getSortedDataService(sorting, orAndFilter, filter);
 
     if (data) {
       res.status(200).json({
@@ -103,7 +125,7 @@ const getAllSortedDataController = async (req, res, next) => {
 
 const getDistinctElemController = async (req, res, next) => {
   try {
-    const data = await getDistinctElemService();
+    const data = await getDistinctElemService(undefined);
     if (data) {
       res.status(200).json({
         type: STATUS.SUCCESS,

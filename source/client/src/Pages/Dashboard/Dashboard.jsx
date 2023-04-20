@@ -78,6 +78,9 @@ function Dashboard() {
         to_data: searchParams.get("to_data")
           ? searchParams.get("to_data")
           : undefined,
+        orAndFilter: searchParams.get("orAndFilter")
+          ? searchParams.get("orAndFilter")
+          : undefined,
 
         filter: {
           country: searchParams.get("country")
@@ -102,7 +105,30 @@ function Dashboard() {
       })
     );
 
-    dispatch(getAllDistinctDataThunk());
+    dispatch(
+      getAllDistinctDataThunk({
+        filter: {
+          country: searchParams.get("country")
+            ? searchParams.get("country")
+            : undefined,
+          topic: searchParams.get("topic")
+            ? searchParams.get("topic")
+            : undefined,
+          sector: searchParams.get("sector")
+            ? searchParams.get("sector")
+            : undefined,
+          region: searchParams.get("region")
+            ? searchParams.get("region")
+            : undefined,
+          pestle: searchParams.get("pestle")
+            ? searchParams.get("pestle")
+            : undefined,
+          source: searchParams.get("source")
+            ? searchParams.get("source")
+            : undefined,
+        },
+      })
+    );
   }, [searchParams]);
 
   // drop down

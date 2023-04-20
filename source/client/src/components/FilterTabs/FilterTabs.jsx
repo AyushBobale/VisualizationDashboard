@@ -3,6 +3,7 @@ import "./FilterTab.css";
 import React, { useEffect, useState } from "react";
 
 import Dropdown from "../Dropdown/Dropdown";
+import ToggleButton from "../ToggleButton/ToggleButton";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -18,6 +19,7 @@ export const FilterTabs = () => {
   const [selectedRegion, setSelectedRegion] = useState();
   const [selectedPeslte, setSelectedPestle] = useState();
   const [selectedSource, setSelectedSource] = useState();
+  const [andOr, setAndOr] = useState(false);
 
   const resetFilters = () => {
     searchParams.delete("country");
@@ -29,6 +31,13 @@ export const FilterTabs = () => {
     setSearchParams(searchParams);
   };
 
+  const handleAndOr = () => {
+    setAndOr(!andOr);
+    const params = Object.fromEntries(searchParams);
+    params["orAndFilter"] = !andOr ? 0 : 1;
+    setSearchParams(params);
+  };
+
   useEffect(() => {
     setSelectedCountry(searchParams.get("country"));
     setSelectedRegion(searchParams.get("region"));
@@ -36,6 +45,7 @@ export const FilterTabs = () => {
     setSelectedPestle(searchParams.get("pestle"));
     setSelectedSector(searchParams.get("sector"));
     setSelectedTopic(searchParams.get("topic"));
+    setSelectedTopic(searchParams.get("orAndFilter"));
   }, [searchParams]);
 
   return (
@@ -45,12 +55,20 @@ export const FilterTabs = () => {
         <button
           className="primary-btn"
           onClick={() => {
-            console.log("test");
             resetFilters();
           }}
         >
           {" "}
           Reset Filters
+        </button>
+
+        <button
+          className="primary-btn"
+          onClick={() => {
+            handleAndOr();
+          }}
+        >
+          {andOr ? "Or" : "And"} Filter Values
         </button>
       </div>
 

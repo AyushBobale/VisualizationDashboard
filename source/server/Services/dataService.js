@@ -20,7 +20,6 @@ const addInitialService = async (data) => {
 };
 
 const getSortedDataService = async (data, filter, rangeFilters) => {
-  console.log([filter ? filter : {}, ...rangeFilters]);
   return DataModel.find({
     $and: [
       filter ? filter : {},
@@ -46,64 +45,64 @@ const getSortedDataService = async (data, filter, rangeFilters) => {
   }).sort(data);
 };
 
-const getDistinctElemService = async (data) => {
+const getDistinctElemService = async (filter) => {
   const end_year = await DataModel.distinct(
     "end_year",
-    { end_year: { $nin: [null, ""] } },
+    { $and: [{ end_year: { $nin: [null, ""] } }, filter ? filter : {}] },
     { end_year: 1 }
   );
 
   const start_year = await DataModel.distinct(
     "start_year",
-    { start_year: { $nin: [null, ""] } },
+    { $and: [{ start_year: { $nin: [null, ""] } }, filter ? filter : {}] },
     { start_year: 1 }
   );
 
   const added = await DataModel.distinct(
     "added",
-    { added: { $nin: [null, ""] } },
+    { $and: [{ added: { $nin: [null, ""] } }, filter ? filter : {}] },
     { added: 1 }
   );
 
   const published = await DataModel.distinct(
     "published",
-    { published: { $nin: [null, ""] } },
+    { $and: [{ published: { $nin: [null, ""] } }, filter ? filter : {}] },
     { published: 1 }
   );
 
   const topic = await DataModel.distinct(
     "topic",
-    { topic: { $nin: [null, ""] } },
+    { $and: [{ topic: { $nin: [null, ""] } }, filter ? filter : {}] },
     { topic: 1 }
   );
 
   const sector = await DataModel.distinct(
     "sector",
-    { sector: { $nin: [null, ""] } },
+    { $and: [{ sector: { $nin: [null, ""] } }, filter ? filter : {}] },
     { sector: 1 }
   );
 
   const region = await DataModel.distinct(
     "region",
-    { region: { $nin: [null, ""] } },
+    { $and: [{ region: { $nin: [null, ""] } }, filter ? filter : {}] },
     { region: 1 }
   );
 
   const pestle = await DataModel.distinct(
     "pestle",
-    { pestle: { $nin: [null, ""] } },
+    { $and: [{ pestle: { $nin: [null, ""] } }, filter ? filter : {}] },
     { pestle: 1 }
   );
 
   const source = await DataModel.distinct(
     "source",
-    { source: { $nin: [null, ""] } },
+    { $and: [{ source: { $nin: [null, ""] } }, filter ? filter : {}] },
     { source: 1 }
   );
 
   const country = await DataModel.distinct(
     "country",
-    { country: { $nin: [null, ""] } },
+    { $and: [{ country: { $nin: [null, ""] } }, filter ? filter : {}] },
     { country: 1 }
   );
 

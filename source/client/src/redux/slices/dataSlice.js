@@ -28,7 +28,7 @@ export const getAllDistinctDataThunk = createAsyncThunk(
   "/data/distinct",
   async (data) => {
     try {
-      const res = await axios.get(LINKS.GET_DISTINCT_DATA);
+      const res = await axios.post(LINKS.GET_DISTINCT_DATA, data);
       return res.data;
     } catch (error) {
       return error.response.data;
