@@ -29,6 +29,9 @@
   text-decoration: none;
 }
 
-.active-link {
-  background-color: brown;
+.active {
+  background: var(--primary-hover);
+  box-shadow: none;
+  border-radius: 0px;
+  color: #ffffff;
 }

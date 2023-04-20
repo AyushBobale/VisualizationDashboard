@@ -1,3 +1,11 @@
+:root {
+  --primary: #212121;
+  --primary-hover: #383838;
+  --primary-border: #748b9c;
+  --primary-font-color: #f0e3e3;
+  --primary-button: #2f576e;
+}
+
 html,
 body {
   height: 100%;
@@ -6,10 +14,11 @@ body {
 * {
   margin: 0;
   padding: 0;
-  font-family: "Courier new", serif;
-  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 1rem;
-  color: #33303c;
+  color: var(--primary-font-color);
 }
 
 * {
@@ -17,11 +26,11 @@ body {
   scrollbar-color: var(--primary-font-color) var(--primary-border);
 }
 
-:root {
-  --primary: #f4f4f5;
-  --primary-border: #cdcdcd;
-  --primary-font-color: #33303c;
+h3 {
+  font-size: 1.2rem;
 }
+
+/* https://colorhunt.co/palette/635985443c6839305318122b */
 
 .root-container {
   display: flex;
@@ -51,6 +60,18 @@ body {
 
 .responsive-chart-container {
   position: relative;
+}
+
+.primary-btn {
+  background: var(--primary-button);
+  color: var(--primary-font-color);
+  border: 1px solid var(--primary-border);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.primary-btn:hover {
+  cursor: pointer;
 }
 
 /* scroll bar */

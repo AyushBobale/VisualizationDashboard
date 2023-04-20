@@ -1,3 +1,5 @@
+import "./FilterTab.css";
+
 import React, { useEffect, useState } from "react";
 
 import Dropdown from "../Dropdown/Dropdown";
@@ -38,16 +40,20 @@ export const FilterTabs = () => {
 
   return (
     <>
-      Filters{" "}
-      <button
-        onClick={() => {
-          console.log("test");
-          resetFilters();
-        }}
-      >
-        {" "}
-        Reset Filters
-      </button>
+      <div className="filter-tabs-header">
+        <h3>Filters</h3>
+        <button
+          className="primary-btn"
+          onClick={() => {
+            console.log("test");
+            resetFilters();
+          }}
+        >
+          {" "}
+          Reset Filters
+        </button>
+      </div>
+
       <div className="drop-down-root-cont">
         <div className="drop-down-cont">
           Country
