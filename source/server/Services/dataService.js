@@ -90,7 +90,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
 
   // console.log(aggDynamic);
 
-  return { result: aggDynamic };
+  return aggDynamic || [];
 };
 
 export {

@@ -27,6 +27,9 @@ function Dashboard() {
   const distinct = useSelector(
     (state) => state.rootReducer?.data?.data?.distinct
   );
+  const statDetails = useSelector(
+    (state) => state.rootReducer?.data?.data?.statDetails
+  );
   const options = [
     {
       value: "Start year",
@@ -82,115 +85,50 @@ function Dashboard() {
   ];
 
   useEffect(() => {
-    dispatch(
-      getAllSortedDataThunk({
-        sortParam: searchParams.get("sortParam")
-          ? searchParams.get("sortParam")
-          : undefined,
-        sortValue: searchParams.get("sortValue")
-          ? searchParams.get("sortValue")
-          : undefined,
-        from_data: searchParams.get("from_data")
-          ? searchParams.get("from_data")
-          : undefined,
-        to_data: searchParams.get("to_data")
-          ? searchParams.get("to_data")
-          : undefined,
-        orAndFilter: searchParams.get("orAndFilter")
-          ? searchParams.get("orAndFilter")
-          : undefined,
+    const reqData = {
+      sortParam: searchParams.get("sortParam")
+        ? searchParams.get("sortParam")
+        : undefined,
+      sortValue: searchParams.get("sortValue")
+        ? searchParams.get("sortValue")
+        : undefined,
+      from_data: searchParams.get("from_data")
+        ? searchParams.get("from_data")
+        : undefined,
+      to_data: searchParams.get("to_data")
+        ? searchParams.get("to_data")
+        : undefined,
+      orAndFilter: searchParams.get("orAndFilter")
+        ? searchParams.get("orAndFilter")
+        : undefined,
+      statFor: searchParams.get("summaryBy")
+        ? searchParams.get("summaryBy")
+        : undefined,
 
-        filter: {
-          country: searchParams.get("country")
-            ? searchParams.get("country")
-            : undefined,
-          topic: searchParams.get("topic")
-            ? searchParams.get("topic")
-            : undefined,
-          sector: searchParams.get("sector")
-            ? searchParams.get("sector")
-            : undefined,
-          region: searchParams.get("region")
-            ? searchParams.get("region")
-            : undefined,
-          pestle: searchParams.get("pestle")
-            ? searchParams.get("pestle")
-            : undefined,
-          source: searchParams.get("source")
-            ? searchParams.get("source")
-            : undefined,
-        },
-      })
-    );
-
-    dispatch(
-      getAllDistinctDataThunk({
-        filter: {
-          country: searchParams.get("country")
-            ? searchParams.get("country")
-            : undefined,
-          topic: searchParams.get("topic")
-            ? searchParams.get("topic")
-            : undefined,
-          sector: searchParams.get("sector")
-            ? searchParams.get("sector")
-            : undefined,
-          region: searchParams.get("region")
-            ? searchParams.get("region")
-            : undefined,
-          pestle: searchParams.get("pestle")
-            ? searchParams.get("pestle")
-            : undefined,
-          source: searchParams.get("source")
-            ? searchParams.get("source")
-            : undefined,
-        },
-      })
-    );
-
-    dispatch(
-      getStatDetailsThunk({
-        sortParam: searchParams.get("sortParam")
-          ? searchParams.get("sortParam")
+      filter: {
+        country: searchParams.get("country")
+          ? searchParams.get("country")
           : undefined,
-        sortValue: searchParams.get("sortValue")
-          ? searchParams.get("sortValue")
+        topic: searchParams.get("topic")
+          ? searchParams.get("topic")
           : undefined,
-        from_data: searchParams.get("from_data")
-          ? searchParams.get("from_data")
+        sector: searchParams.get("sector")
+          ? searchParams.get("sector")
           : undefined,
-        to_data: searchParams.get("to_data")
-          ? searchParams.get("to_data")
+        region: searchParams.get("region")
+          ? searchParams.get("region")
           : undefined,
-        orAndFilter: searchParams.get("orAndFilter")
-          ? searchParams.get("orAndFilter")
+        pestle: searchParams.get("pestle")
+          ? searchParams.get("pestle")
           : undefined,
-        statFor: searchParams.get("summaryBy")
-          ? searchParams.get("summaryBy")
+        source: searchParams.get("source")
+          ? searchParams.get("source")
           : undefined,
-
-        filter: {
-          country: searchParams.get("country")
-            ? searchParams.get("country")
-            : undefined,
-          topic: searchParams.get("topic")
-            ? searchParams.get("topic")
-            : undefined,
-          sector: searchParams.get("sector")
-            ? searchParams.get("sector")
-            : undefined,
-          region: searchParams.get("region")
-            ? searchParams.get("region")
-            : undefined,
-          pestle: searchParams.get("pestle")
-            ? searchParams.get("pestle")
-            : undefined,
-          source: searchParams.get("source")
-            ? searchParams.get("source")
-            : undefined,
-        },
-      })
-    );
+      },
+    };
+    dispatch(getAllSortedDataThunk(reqData));
+    dispatch(getAllDistinctDataThunk(reqData));
+    dispatch(getStatDetailsThunk(reqData));
   }, [searchParams]);
 
   // drop down
@@ -288,21 +226,11 @@ function Dashboard() {
     return formattedData;
   };
 
-  const formattedRadarData = (data, distinctParam, attribute) => {
+  const formatStatDetailsData = (data, attribute) => {
     let formatted = {};
     for (const elm of data) {
-      if (formatted[elm?.[distinctParam]]) {
-        formatted[elm?.[distinctParam]] =
-          formatted[elm?.[distinctParam]] + elm?.[attribute];
-      } else {
-        formatted[elm?.[distinctParam]] = elm?.[attribute]
-          ? elm?.[attribute]
-          : 0;
-      }
+      if (elm) formatted[elm?.["_id"]] = elm?.[attribute];
     }
-    // console.log(formatted);
-    delete formatted[""];
-    delete formatted[null];
     return formatted;
   };
 
@@ -361,11 +289,7 @@ function Dashboard() {
         <div className="charts-grid"></div>
         <div className="dou1 chart-container elivate-shadow">
           <DoughnutChart
-            data={formattedRadarData(
-              data,
-              selectdSummaryBy?.key,
-              selectdSummaryOf?.key
-            )}
+            data={formatStatDetailsData(statDetails, selectdSummaryOf?.key)}
             label={[`${selectdSummaryBy?.value} Sum`]}
             title={`${selectdSummaryOf?.value} Sum for each ${selectdSummaryBy?.value}`}
           />

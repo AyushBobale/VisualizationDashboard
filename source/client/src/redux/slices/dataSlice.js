@@ -59,6 +59,7 @@ const initialState = {
   data: {
     entries: [],
     distinct: {},
+    statDetails: [],
   },
   status: {
     getAllDataThunk: THUNK_STATUS.IDLE,

@@ -156,6 +156,7 @@ const getDistinctElemController = async (req, res, next) => {
 const getStatDetailsController = async (req, res, next) => {
   try {
     const { sorting, orAndFilter, filter } = parseRequest(req);
+    let data;
     data = await getStatDetailsService(orAndFilter, filter, req.body?.statFor);
     if (data) {
       res.status(200).json({
