@@ -3,4 +3,33 @@
   align-items: flex-start;
   justify-content: baseline;
   padding: 0.5rem;
+  gap: 2rem;
+}
+
+.filter-tabs-root-cont {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.filter-tabs-root-cont > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 1500px) {
+}
+
+@media screen and (max-width: 800px) {
+  .filter-tabs-root-cont {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .filter-tabs-root-cont {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

@@ -19,8 +19,15 @@
 .charts-grid {
   display: grid;
   gap: 1rem;
-  grid-template-areas: "var var var" "line1 line1 bar2" "bar1 bar1 bar2" "line2 line2 line2";
-  grid-template-columns: 1fr 1fr 4fr;
+  grid-template-areas:
+    "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"
+    "dou1   dou1    dou1    dou1    dou1    dou1"
+    "filt   filt    filt    filt    filt    filt"
+    "var    var     var     var     var     var"
+    "line1  line1   bar2    bar2    bar2    bar2"
+    "bar1   bar1    bar2    bar2    bar2    bar2"
+    "line2  line2   line2   line2   line2   line2";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .chart-container {
@@ -30,6 +37,24 @@
 
 .chart-container > div {
   margin: 1rem;
+}
+
+.dfilt {
+  width: 100%;
+  grid-area: dfilt;
+}
+
+.dou1 {
+  grid-area: dou1;
+  width: 100%;
+}
+
+.filt {
+  display: flex;
+  flex-direction: column;
+  grid-area: filt;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 .var-select {

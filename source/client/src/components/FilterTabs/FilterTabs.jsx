@@ -52,31 +52,36 @@ export const FilterTabs = () => {
   }, [searchParams]);
 
   return (
-    <>
+    <div className="filt">
       <div className="filter-tabs-header">
         <h3>Filters</h3>
-        <button
-          className="primary-btn"
-          onClick={() => {
-            resetFilters();
-          }}
-        >
-          {" "}
-          Reset Filters
-        </button>
-
-        <button
-          className="primary-btn"
-          onClick={() => {
-            handleAndOr();
-          }}
-        >
-          {andOr ? "Or" : "And"} Filter Values
-        </button>
       </div>
 
-      <div className="drop-down-root-cont">
-        <div className="drop-down-cont">
+      <div className="filter-tabs-root-cont">
+        <div>
+          <button
+            className="primary-btn"
+            onClick={() => {
+              resetFilters();
+            }}
+          >
+            {" "}
+            Reset Filters
+          </button>
+        </div>
+        <div>
+          <button
+            className="primary-btn"
+            onClick={() => {
+              handleAndOr();
+            }}
+          >
+            {andOr ? "Or" : "And"} Filter Values
+          </button>
+        </div>
+      </div>
+      <div className="filter-tabs-root-cont">
+        <div>
           Country
           <Dropdown
             paramName={"country"}
@@ -85,7 +90,7 @@ export const FilterTabs = () => {
             onSelectedOptionChange={setSelectedCountry}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           Region
           <Dropdown
             paramName={"region"}
@@ -94,7 +99,7 @@ export const FilterTabs = () => {
             onSelectedOptionChange={setSelectedRegion}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           Source
           <Dropdown
             paramName={"source"}
@@ -103,9 +108,7 @@ export const FilterTabs = () => {
             onSelectedOptionChange={setSelectedSource}
           />
         </div>
-      </div>
-      <div className="drop-down-root-cont">
-        <div className="drop-down-cont">
+        <div>
           Pestle
           <Dropdown
             paramName={"pestle"}
@@ -114,7 +117,7 @@ export const FilterTabs = () => {
             onSelectedOptionChange={setSelectedPestle}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           Sector
           <Dropdown
             paramName={"sector"}
@@ -123,7 +126,7 @@ export const FilterTabs = () => {
             onSelectedOptionChange={setSelectedSector}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           Topic
           <Dropdown
             paramName={"topic"}
@@ -133,6 +136,6 @@ export const FilterTabs = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };

@@ -1,8 +1,8 @@
 import Chart from "chart.js/auto";
-import { Radar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import React from "react";
 
-const RadarChart = ({ data, label, bgColor, borderColor, title }) => {
+const DoughnutChart = ({ data, label, bgColor, borderColor, title }) => {
   const options = {
     responsive: true,
     maintainAspectRatio: true,
@@ -17,7 +17,6 @@ const RadarChart = ({ data, label, bgColor, borderColor, title }) => {
       },
     },
   };
-  console.log(data);
   const dataNew = {
     labels: Object.keys(data),
     datasets: [
@@ -42,9 +41,9 @@ const RadarChart = ({ data, label, bgColor, borderColor, title }) => {
   };
   return (
     <div>
-      <Radar data={dataNew} options={options} />
+      <Doughnut data={dataNew} options={options} />
     </div>
   );
 };
 
-export default RadarChart;
+export default DoughnutChart;

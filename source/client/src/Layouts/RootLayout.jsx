@@ -10,7 +10,7 @@ function RootLayout() {
     <div className="root-container">
       <Sidebar sideBar={sideBar} setSideBar={setSideBar} />
       <div className="nav-outlet-container">
-        <Navbar />
+        <Navbar sideBar={sideBar} toggleSideBar={setSideBar} />
         <div className="outlet-container">
           <Outlet />
         </div>

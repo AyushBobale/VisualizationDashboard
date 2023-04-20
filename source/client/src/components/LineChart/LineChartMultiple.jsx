@@ -31,7 +31,7 @@ function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
     }),
   };
   return (
-    <div className="responsive-chart-container">
+    <div className="inner-chart-container">
       <Line data={dataNew} options={options} />
     </div>
   );

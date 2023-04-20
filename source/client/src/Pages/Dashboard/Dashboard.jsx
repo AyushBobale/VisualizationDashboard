@@ -1,4 +1,5 @@
 import "./Dashboard.css";
+import "../../components/FilterTabs/FilterTab.css";
 
 import React, { useEffect, useState } from "react";
 import { createSearchParams, useSearchParams } from "react-router-dom";
@@ -11,12 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BarChart from "../../components/BarChart/BarChart";
 import BarChartMultiple from "../../components/BarChart/BarChartMultiple";
+import DoughnutChart from "../../components/RadarChart/RadarChart";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import { FilterTabs } from "../../components/FilterTabs/FilterTabs";
 import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
-import RadarChart from "../../components/RadarChart/RadarChart";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -37,12 +38,20 @@ function Dashboard() {
     ,
   ];
 
-  // 'rgba(255, 99, 132, 0.2)',
-  // 'rgba(54, 162, 235, 0.2)',
-  // 'rgba(255, 206, 86, 0.2)',
-  // 'rgba(75, 192, 192, 0.2)',
-  // 'rgba(153, 102, 255, 0.2)',
-  // 'rgba(255, 159, 64, 0.2)',
+  const summarizedOptions = [
+    {
+      value: "Region",
+      key: "region",
+    },
+    {
+      value: "Pestle",
+      key: "pestle",
+    },
+    {
+      value: "Sector",
+      key: "sector",
+    },
+  ];
 
   const attributes = [
     {
@@ -142,6 +151,10 @@ function Dashboard() {
   // drop down
   //sorting params
   const [selectdSortParam, setSelectedSortParam] = useState(options[0]);
+  const [selectdSummaryBy, setSelectedSummaryBy] = useState(
+    summarizedOptions[0]
+  );
+  const [selectdSummaryOf, setSelectedSummaryOf] = useState(attributes[0]);
   const [selectdSortDirecton, setSelectedSortDirection] = useState();
   const [selectdSortFrom, setSelectedSortFrom] = useState();
   const [selectdSortTo, setSelectedSortTo] = useState();
@@ -158,6 +171,24 @@ function Dashboard() {
       );
     } else {
       setSelectedSortParam(options[0]);
+    }
+    if (searchParams.get("summaryBy")) {
+      setSelectedSummaryBy(
+        summarizedOptions?.filter(
+          (elm) => elm.key == searchParams.get("summaryBy")
+        )?.[0]
+      );
+    } else {
+      setSelectedSummaryBy(summarizedOptions[0]);
+    }
+    if (searchParams.get("summaryOf")) {
+      setSelectedSummaryOf(
+        attributes?.filter(
+          (elm) => elm.key == searchParams.get("summaryOf")
+        )?.[0]
+      );
+    } else {
+      setSelectedSummaryOf(attributes[0]);
     }
   }, [searchParams]);
 
@@ -211,10 +242,30 @@ function Dashboard() {
     return formattedData;
   };
 
+  const formattedRadarData = (data, distinctParam, attribute) => {
+    let formatted = {};
+    for (const elm of data) {
+      if (formatted[elm?.[distinctParam]]) {
+        formatted[elm?.[distinctParam]] =
+          formatted[elm?.[distinctParam]] + elm?.[attribute];
+      } else {
+        formatted[elm?.[distinctParam]] = elm?.[attribute]
+          ? elm?.[attribute]
+          : 0;
+      }
+    }
+    // console.log(formatted);
+    delete formatted[""];
+    delete formatted[null];
+    return formatted;
+  };
+
+  console.log(selectdSummaryBy);
+
   return (
     <div className="dash-container">
-      <div className="drop-down-root-cont">
-        <div className="drop-down-cont">
+      <div className="filter-tabs-root-cont">
+        <div>
           Search By
           <Dropdown
             paramName={"sortParam"}
@@ -223,7 +274,7 @@ function Dashboard() {
             onSelectedOptionChange={setSelectedSortParam}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           From
           <Dropdown
             paramName={"from_data"}
@@ -232,7 +283,7 @@ function Dashboard() {
             onSelectedOptionChange={setSelectedSortFrom}
           />
         </div>
-        <div className="drop-down-cont">
+        <div>
           To
           <Dropdown
             paramName={"to_data"}
@@ -242,16 +293,51 @@ function Dashboard() {
           />
         </div>
       </div>
-      <FilterTabs />
       <div className="charts-grid">
-        <div className="drop-down-cont var-select">
-          Attribute
-          <Dropdown
-            paramName={"attribute"}
-            options={attributes}
-            selectedOption={selectedAttribute}
-            onSelectedOptionChange={setSelectedAttribute}
+        <div className="filter-tabs-root-cont dfilt">
+          <div>
+            Summarize for
+            <Dropdown
+              paramName={"summaryBy"}
+              options={summarizedOptions}
+              selectedOption={selectdSummaryBy}
+              onSelectedOptionChange={setSelectedSummaryBy}
+            />
+          </div>
+          <div>
+            Summary of
+            <Dropdown
+              paramName={"summaryOf"}
+              options={attributes}
+              selectedOption={selectdSummaryOf}
+              onSelectedOptionChange={setSelectedSummaryOf}
+            />
+          </div>
+        </div>
+        <div className="charts-grid"></div>
+        <div className="dou1 chart-container elivate-shadow">
+          <DoughnutChart
+            data={formattedRadarData(
+              data,
+              selectdSummaryBy?.key,
+              selectdSummaryOf?.key
+            )}
+            label={[`${selectdSummaryBy?.value} Sum`]}
+            title={`${selectdSummaryOf?.value} Sum for each ${selectdSummaryBy?.value}`}
           />
+        </div>
+        <FilterTabs />
+
+        <div className="filter-tabs-root-cont var-select">
+          <div>
+            Attribute
+            <Dropdown
+              paramName={"attribute"}
+              options={attributes}
+              selectedOption={selectedAttribute}
+              onSelectedOptionChange={setSelectedAttribute}
+            />
+          </div>
         </div>
         <div className="line1 chart-container elivate-shadow">
           <LineChart
@@ -313,27 +399,6 @@ function Dashboard() {
             bgColor={[]}
             label={[`Combined Sum`]}
             title={`Combined Sum per year`}
-          />
-        </div>
-        <div className="chart-container elivate-shadow">
-          <RadarChart
-            data={formatedSortParamVsDataParamSum(
-              data,
-              selectdSortParam?.key,
-              selectedAttribute?.key
-            )}
-            borderColor={
-              attributes?.filter(
-                (elm) => selectedAttribute?.key == elm.key
-              )?.[0]?.borderColor
-            }
-            bgColor={
-              attributes?.filter(
-                (elm) => selectedAttribute?.key == elm.key
-              )?.[0]?.backGroundColor
-            }
-            label={[`${selectedAttribute?.value} Sum`]}
-            title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
       </div>

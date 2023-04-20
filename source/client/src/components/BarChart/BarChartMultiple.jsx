@@ -35,7 +35,7 @@ const BarChartMultiple = ({
     }),
   };
   return (
-    <div>
+    <div className="inner-chart-container">
       <Bar data={dataNew} options={options} />
     </div>
   );
