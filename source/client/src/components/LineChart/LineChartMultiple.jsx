@@ -5,6 +5,9 @@ import React from "react";
 function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
+    // resizeDelay: 0,
     plugins: {
       legend: {
         position: "top",
@@ -28,7 +31,7 @@ function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
     }),
   };
   return (
-    <div>
+    <div className="responsive-chart-container">
       <Line data={dataNew} options={options} />
     </div>
   );

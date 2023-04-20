@@ -18,7 +18,8 @@
   border-right: 2px solid var(--primary-border);
 }
 
-.sidebar > div {
+.sidebar > div,
+.sidebar > a {
   border-radius: 6px;
   border: 1px solid var(--primary-border);
   padding: 0.5rem 1rem;

@@ -5,6 +5,7 @@ import React from "react";
 function LineChart({ data, label, bgColor, borderColor, title }) {
   const options = {
     responsive: true,
+
     plugins: {
       legend: {
         display: false,

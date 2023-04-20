@@ -17,6 +17,7 @@ function App() {
       <Router>
         <Routes>
           <Route path={ROUTES.ROOT} element={<RootLayout />}>
+            <Route path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

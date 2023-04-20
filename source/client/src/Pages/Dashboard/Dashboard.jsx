@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BarChart from "../../components/BarChart/BarChart";
 import BarChartMultiple from "../../components/BarChart/BarChartMultiple";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import { FilterTabs } from "../../components/FilterTabs/FilterTabs";
 import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
@@ -82,8 +83,20 @@ function Dashboard() {
           country: searchParams.get("country")
             ? searchParams.get("country")
             : undefined,
-          end_year: searchParams.get("end_year_from")
-            ? searchParams.get("end_year_from")
+          topic: searchParams.get("topic")
+            ? searchParams.get("topic")
+            : undefined,
+          sector: searchParams.get("sector")
+            ? searchParams.get("sector")
+            : undefined,
+          region: searchParams.get("region")
+            ? searchParams.get("region")
+            : undefined,
+          pestle: searchParams.get("pestle")
+            ? searchParams.get("pestle")
+            : undefined,
+          source: searchParams.get("source")
+            ? searchParams.get("source")
             : undefined,
         },
       })
@@ -100,15 +113,9 @@ function Dashboard() {
   const [selectdSortTo, setSelectedSortTo] = useState();
   const [sortOptions, setSortOptions] = useState([]);
 
-  // lower tabs
-  const [selectedCountry, setSelectedCountry] = useState(
-    distinct?.country?.[0]
-  );
-
   const [selectedAttribute, setSelectedAttribute] = useState(attributes[0]);
   // this use effect is used to refelect the changes from link to state vars
   useEffect(() => {
-    setSelectedCountry(searchParams.get("country"));
     setSelectedSortFrom(searchParams.get("from_data"));
     setSelectedSortTo(searchParams.get("to_data"));
     if (searchParams.get("sortParam")) {
@@ -133,9 +140,6 @@ function Dashboard() {
       searchParams.delete("sortValue");
     }
   }, [searchParams.get("sortParam"), distinct]);
-
-  const borderColor = "rgba(255, 130, 130, 0.5)";
-  const bgColor = "white";
 
   const formatedSortParamVsDataParamSum = (data, sortParam, dataParam) => {
     let formattedData = {};
@@ -173,14 +177,8 @@ function Dashboard() {
     return formattedData;
   };
 
-  // console.log(
-  //   attributes?.filter((elm) => selectedAttribute?.key == elm.key)?.[0]
-  //     ?.backGroundColor
-  // );
-
   return (
     <div className="dash-container">
-      Dashboard
       <div className="drop-down-root-cont">
         <div className="drop-down-cont">
           Search By
@@ -210,17 +208,7 @@ function Dashboard() {
           />
         </div>
       </div>
-      <div className="drop-down-root-cont">
-        <div className="drop-down-cont">
-          Country
-          <Dropdown
-            paramName={"country"}
-            options={distinct?.country}
-            selectedOption={selectedCountry}
-            onSelectedOptionChange={setSelectedCountry}
-          />
-        </div>
-      </div>
+      <FilterTabs />
       <div className="charts-grid">
         <div className="drop-down-cont var-select">
           Attribute

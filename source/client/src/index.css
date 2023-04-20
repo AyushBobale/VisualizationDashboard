@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -30,6 +35,11 @@
   background-color: var(--primary);
 }
 
+.outlet-container {
+  min-height: 100%;
+  width: 100%;
+}
+
 .elivate-shadow {
   cursor: pointer;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
@@ -37,6 +47,10 @@
 
 .elivate-shadow:hover {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+.responsive-chart-container {
+  position: relative;
 }
 
 /* scroll bar */

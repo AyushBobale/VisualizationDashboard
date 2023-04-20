@@ -5,6 +5,8 @@ import React from "react";
 const BarChart = ({ data, label, bgColor, borderColor, title }) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1.8,
     plugins: {
       legend: {
         display: false,

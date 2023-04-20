@@ -7,12 +7,13 @@ import React from "react";
 function Sidebar({ sideBar, setSideBar }) {
   return (
     <div className={sideBar ? "sidebar" : "sidebar-closed"}>
-      <div className="elivate-shadow">
-        <NavLink to={ROUTES.ROOT}>Home</NavLink>
-      </div>
-      <div className="elivate-shadow">
-        <NavLink to={ROUTES.DASHBOARD}>Dashboard</NavLink>
-      </div>
+      <NavLink className="elivate-shadow" to={ROUTES.ROOT}>
+        Home
+      </NavLink>
+
+      <NavLink className="elivate-shadow" to={ROUTES.DASHBOARD}>
+        Dashboard
+      </NavLink>
     </div>
   );
 }
