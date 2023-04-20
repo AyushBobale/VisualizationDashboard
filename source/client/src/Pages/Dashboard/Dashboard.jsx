@@ -260,8 +260,6 @@ function Dashboard() {
     return formatted;
   };
 
-  console.log(selectdSummaryBy);
-
   return (
     <div className="dash-container">
       <div className="filter-tabs-root-cont">
