@@ -7,6 +7,7 @@ import {
   getAllDataThunk,
   getAllDistinctDataThunk,
   getAllSortedDataThunk,
+  getStatDetailsThunk,
 } from "../../redux/slices/dataSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -146,6 +147,50 @@ function Dashboard() {
         },
       })
     );
+
+    dispatch(
+      getStatDetailsThunk({
+        sortParam: searchParams.get("sortParam")
+          ? searchParams.get("sortParam")
+          : undefined,
+        sortValue: searchParams.get("sortValue")
+          ? searchParams.get("sortValue")
+          : undefined,
+        from_data: searchParams.get("from_data")
+          ? searchParams.get("from_data")
+          : undefined,
+        to_data: searchParams.get("to_data")
+          ? searchParams.get("to_data")
+          : undefined,
+        orAndFilter: searchParams.get("orAndFilter")
+          ? searchParams.get("orAndFilter")
+          : undefined,
+        statFor: searchParams.get("summaryBy")
+          ? searchParams.get("summaryBy")
+          : undefined,
+
+        filter: {
+          country: searchParams.get("country")
+            ? searchParams.get("country")
+            : undefined,
+          topic: searchParams.get("topic")
+            ? searchParams.get("topic")
+            : undefined,
+          sector: searchParams.get("sector")
+            ? searchParams.get("sector")
+            : undefined,
+          region: searchParams.get("region")
+            ? searchParams.get("region")
+            : undefined,
+          pestle: searchParams.get("pestle")
+            ? searchParams.get("pestle")
+            : undefined,
+          source: searchParams.get("source")
+            ? searchParams.get("source")
+            : undefined,
+        },
+      })
+    );
   }, [searchParams]);
 
   // drop down
@@ -196,6 +241,7 @@ function Dashboard() {
   useEffect(() => {
     const params = Object.fromEntries(searchParams);
     params["sortValue"] = 1;
+    params["summaryBy"] = selectdSummaryBy?.key;
     setSearchParams(createSearchParams(params));
     setSelectedSortDirection(1);
     setSortOptions(distinct?.[searchParams.get("sortParam")]);

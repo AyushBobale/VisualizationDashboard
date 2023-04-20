@@ -27,78 +27,70 @@ const getSortedDataService = async (data, filter, rangeFilters) => {
 };
 
 const getDistinctElemService = async (filter) => {
-  const end_year = await DataModel.distinct(
-    "end_year",
-    { $and: [{ end_year: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { end_year: 1 }
-  );
+  const uniqueValues = await DataModel.aggregate([
+    {
+      $group: {
+        _id: null,
+        end_year: { $addToSet: "$end_year" },
+        start_year: { $addToSet: "$start_year" },
+        topic: { $addToSet: "$topic" },
+        sector: { $addToSet: "$sector" },
+        region: { $addToSet: "$region" },
+        pestle: { $addToSet: "$pestle" },
+        source: { $addToSet: "$source" },
+        country: { $addToSet: "$country" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        end_year: 1,
+        start_year: 1,
+        sector: 1,
+        topic: 1,
+        region: 1,
+        pestle: 1,
+        source: 1,
+        country: 1,
+      },
+    },
+  ]);
 
-  const start_year = await DataModel.distinct(
-    "start_year",
-    { $and: [{ start_year: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { start_year: 1 }
-  );
-
-  const added = await DataModel.distinct(
-    "added",
-    { $and: [{ added: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { added: 1 }
-  );
-
-  const published = await DataModel.distinct(
-    "published",
-    { $and: [{ published: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { published: 1 }
-  );
-
-  const topic = await DataModel.distinct(
-    "topic",
-    { $and: [{ topic: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { topic: 1 }
-  );
-
-  const sector = await DataModel.distinct(
-    "sector",
-    { $and: [{ sector: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { sector: 1 }
-  );
-
-  const region = await DataModel.distinct(
-    "region",
-    { $and: [{ region: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { region: 1 }
-  );
-
-  const pestle = await DataModel.distinct(
-    "pestle",
-    { $and: [{ pestle: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { pestle: 1 }
-  );
-
-  const source = await DataModel.distinct(
-    "source",
-    { $and: [{ source: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { source: 1 }
-  );
-
-  const country = await DataModel.distinct(
-    "country",
-    { $and: [{ country: { $nin: [null, ""] } }, filter ? filter : {}] },
-    { country: 1 }
-  );
+  console.log(uniqueValues?.[0]?.end_year?.sort());
 
   return {
-    end_year: end_year?.sort(),
-    start_year: start_year?.sort(),
-    // added: added?.sort(),
-    // published: published?.sort(),
-    topic: topic?.sort(),
-    sector: sector?.sort(),
-    region: region?.sort(),
-    pestle: pestle?.sort(),
-    source: source?.sort(),
-    country: country?.sort(),
+    end_year: uniqueValues?.[0]?.end_year?.sort(),
+    start_year: uniqueValues?.[0]?.start_year?.sort(),
+    topic: uniqueValues?.[0]?.topic?.sort(),
+    sector: uniqueValues?.[0]?.sector?.sort(),
+    region: uniqueValues?.[0]?.region?.sort(),
+    pestle: uniqueValues?.[0]?.pestle?.sort(),
+    source: uniqueValues?.[0]?.source?.sort(),
+    country: uniqueValues?.[0]?.country?.sort(),
   };
+};
+
+const getStatDetailsService = async (filter, rangeFilters, statFor) => {
+  const aggDynamic = await DataModel.aggregate([
+    {
+      $match: {
+        $and: [filter ? filter : {}, ...rangeFilters],
+      },
+    },
+    {
+      $group: {
+        _id: `$${statFor}`,
+        intensity: { $sum: "$intensity" },
+        relevance: { $sum: "$relevance" },
+        impact: { $sum: "$impact" },
+        likelihood: { $sum: "$likelihood" },
+      },
+    },
+  ]);
+
+  // console.log(aggDynamic);
+
+  return { result: aggDynamic };
 };
 
 export {
@@ -106,4 +98,5 @@ export {
   addInitialService,
   getSortedDataService,
   getDistinctElemService,
+  getStatDetailsService,
 };

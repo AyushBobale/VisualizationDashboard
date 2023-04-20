@@ -3,6 +3,7 @@ import {
   getAllDataService,
   getDistinctElemService,
   getSortedDataService,
+  getStatDetailsService,
 } from "../Services/dataService.js";
 
 import DataModel from "../Models/dataModel.js";
@@ -145,9 +146,70 @@ const getDistinctElemController = async (req, res, next) => {
   }
 };
 
+const getStatDetailsController = async (req, res, next) => {
+  try {
+    let filter = [];
+    let orAndFilter = {};
+    let data;
+
+    // setting from to filter
+    // make checks here for date
+    if (req.body?.from_data) {
+      let oneFilter = {};
+      oneFilter[req.body?.sortParam] = { $gte: parseInt(req.body?.from_data) };
+      filter.push(oneFilter);
+    }
+    if (req.body?.to_data) {
+      let oneFilter = {};
+      oneFilter[req.body?.sortParam] = { $lte: parseInt(req.body?.to_data) };
+      filter.push(oneFilter);
+    }
+
+    // setting up or and filter
+    if (parseInt(req.body?.orAndFilter)) {
+      orAndFilter["$or"] = [];
+      for (const key of Object.keys(req.body?.filter)) {
+        let onFilter = { [key]: req.body?.filter?.[key] };
+        orAndFilter["$or"].push(onFilter);
+      }
+      if (!orAndFilter["$or"]?.length) {
+        delete orAndFilter["$or"];
+      }
+    } else {
+      orAndFilter["$and"] = [];
+      for (const key of Object.keys(req.body?.filter)) {
+        let onFilter = { [key]: req.body?.filter?.[key] };
+        orAndFilter["$and"].push(onFilter);
+      }
+      if (!orAndFilter["$and"]?.length) {
+        delete orAndFilter["$and"];
+      }
+    }
+
+    data = await getStatDetailsService(orAndFilter, filter, req.body?.statFor);
+    if (data) {
+      res.status(200).json({
+        type: STATUS.SUCCESS,
+        message: "Fetched data sucessfully",
+        data: data,
+      });
+    }
+    if (!data) {
+      res.status(200).json({
+        type: STATUS.FAILURE,
+        message: "Could not fetch data",
+        data: [],
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   getAllDataController,
   addInitialDataController,
   getAllSortedDataController,
   getDistinctElemController,
+  getStatDetailsController,
 };

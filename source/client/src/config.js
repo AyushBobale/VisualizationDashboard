@@ -4,6 +4,7 @@ export const LINKS = {
   GET_DATA: `${API_ROOT}/data`,
   GET_SORTED_DATA: `${API_ROOT}/data/sort`,
   GET_DISTINCT_DATA: `${API_ROOT}/data/distinct`,
+  GET_STAT_DETAILS: `${API_ROOT}/data/stat_details`,
 };
 
 export const ROUTER_ROOT = "/";

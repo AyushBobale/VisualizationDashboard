@@ -48,15 +48,18 @@ const Dropdown = ({
           >
             Reset
           </div>
-          {options?.map((option) => (
-            <div
-              key={option?.key ? option?.key : option}
-              className="dropdown-option"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option?.value ? option?.value : option}
-            </div>
-          ))}
+          {options?.map(
+            (option) =>
+              option && (
+                <div
+                  key={option?.key ? option?.key : option}
+                  className="dropdown-option"
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option?.value ? option?.value : option}
+                </div>
+              )
+          )}
         </div>
       )}
     </div>

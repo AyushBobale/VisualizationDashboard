@@ -36,6 +36,18 @@ export const getAllDistinctDataThunk = createAsyncThunk(
   }
 );
 
+export const getStatDetailsThunk = createAsyncThunk(
+  "/data/stat_details",
+  async (data) => {
+    try {
+      const res = await axios.post(LINKS.GET_STAT_DETAILS, data);
+      return res.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   errorData: {
@@ -52,6 +64,7 @@ const initialState = {
     getAllDataThunk: THUNK_STATUS.IDLE,
     getAllSortedDataThunk: THUNK_STATUS.IDLE,
     getAllDistinctDataThunk: THUNK_STATUS.IDLE,
+    getStatDetailsThunk: THUNK_STATUS.IDLE,
   },
 };
 
@@ -135,6 +148,32 @@ const dataSlice = createSlice({
       .addCase(getAllDistinctDataThunk.rejected, (state, action) => {
         state.loading = false;
         state.status.getAllDistinctDataThunk = THUNK_STATUS.ERROR;
+        state.errorData = REJECTED_ERROR;
+      })
+      // Stat detailas data
+      .addCase(getStatDetailsThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getStatDetailsThunk.fulfilled, (state, { payload }) => {
+        state.status.getStatDetailsThunk = THUNK_STATUS.FULFILLED;
+        switch (payload.type) {
+          case STATUS.SUCCESS:
+            state.loading = false;
+            state.data.statDetails = payload.data;
+            break;
+          default:
+            state.loading = false;
+            state.isError = true;
+            state.errorData = {
+              message: payload.message,
+              type: payload.type,
+              errors: payload.errors,
+            };
+        }
+      })
+      .addCase(getStatDetailsThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.status.getStatDetailsThunk = THUNK_STATUS.ERROR;
         state.errorData = REJECTED_ERROR;
       });
   },
