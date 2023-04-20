@@ -229,7 +229,7 @@ function Dashboard() {
   const formatStatDetailsData = (data, attribute) => {
     let formatted = {};
     for (const elm of data) {
-      if (elm) formatted[elm?.["_id"]] = elm?.[attribute];
+      if (elm?._id) formatted[elm?.["_id"]] = elm?.[attribute];
     }
     return formatted;
   };
