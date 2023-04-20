@@ -54,55 +54,62 @@ const addInitialDataController = async (data) => {
   }
 };
 
+// helper function
+// preprocesse req
+const parseRequest = (req) => {
+  let sorting = {};
+  let filter = [];
+  let orAndFilter = {};
+
+  // Settig sort param
+  if (req.body?.sortParam) {
+    sorting[req.body?.sortParam] = parseInt(req.body?.sortValue || "1");
+  }
+  if (req.body?.sortParam) {
+    sorting[req.body?.sortParam] = req.body?.sortValue;
+  }
+
+  // setting from to filter
+  // make checks here for date
+  if (req.body?.from_data) {
+    let oneFilter = {};
+    oneFilter[req.body?.sortParam] = { $gte: parseInt(req.body?.from_data) };
+    filter.push(oneFilter);
+  }
+  if (req.body?.to_data) {
+    let oneFilter = {};
+    oneFilter[req.body?.sortParam] = { $lte: parseInt(req.body?.to_data) };
+    filter.push(oneFilter);
+  }
+
+  // setting up or and filter
+  if (parseInt(req.body?.orAndFilter)) {
+    orAndFilter["$or"] = [];
+    for (const key of Object.keys(req.body?.filter)) {
+      let onFilter = { [key]: req.body?.filter?.[key] };
+      orAndFilter["$or"].push(onFilter);
+    }
+    if (!orAndFilter["$or"]?.length) {
+      delete orAndFilter["$or"];
+    }
+  } else {
+    orAndFilter["$and"] = [];
+    for (const key of Object.keys(req.body?.filter)) {
+      let onFilter = { [key]: req.body?.filter?.[key] };
+      orAndFilter["$and"].push(onFilter);
+    }
+    if (!orAndFilter["$and"]?.length) {
+      delete orAndFilter["$and"];
+    }
+  }
+
+  return { sorting, orAndFilter, filter };
+};
+
 const getAllSortedDataController = async (req, res, next) => {
   try {
-    let sorting = {};
-    let filter = [];
-    let orAndFilter = {};
-
-    // Settig sort param
+    const { sorting, orAndFilter, filter } = parseRequest(req);
     let data;
-    if (req.body?.sortParam) {
-      sorting[req.body?.sortParam] = parseInt(req.body?.sortValue || "1");
-    }
-    if (req.body?.sortParam) {
-      sorting[req.body?.sortParam] = req.body?.sortValue;
-    }
-
-    // setting from to filter
-    // make checks here for date
-    if (req.body?.from_data) {
-      let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $gte: parseInt(req.body?.from_data) };
-      filter.push(oneFilter);
-    }
-    if (req.body?.to_data) {
-      let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $lte: parseInt(req.body?.to_data) };
-      filter.push(oneFilter);
-    }
-
-    // setting up or and filter
-    if (parseInt(req.body?.orAndFilter)) {
-      orAndFilter["$or"] = [];
-      for (const key of Object.keys(req.body?.filter)) {
-        let onFilter = { [key]: req.body?.filter?.[key] };
-        orAndFilter["$or"].push(onFilter);
-      }
-      if (!orAndFilter["$or"]?.length) {
-        delete orAndFilter["$or"];
-      }
-    } else {
-      orAndFilter["$and"] = [];
-      for (const key of Object.keys(req.body?.filter)) {
-        let onFilter = { [key]: req.body?.filter?.[key] };
-        orAndFilter["$and"].push(onFilter);
-      }
-      if (!orAndFilter["$and"]?.length) {
-        delete orAndFilter["$and"];
-      }
-    }
-
     data = await getSortedDataService(sorting, orAndFilter, filter);
 
     if (data) {
@@ -148,44 +155,7 @@ const getDistinctElemController = async (req, res, next) => {
 
 const getStatDetailsController = async (req, res, next) => {
   try {
-    let filter = [];
-    let orAndFilter = {};
-    let data;
-
-    // setting from to filter
-    // make checks here for date
-    if (req.body?.from_data) {
-      let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $gte: parseInt(req.body?.from_data) };
-      filter.push(oneFilter);
-    }
-    if (req.body?.to_data) {
-      let oneFilter = {};
-      oneFilter[req.body?.sortParam] = { $lte: parseInt(req.body?.to_data) };
-      filter.push(oneFilter);
-    }
-
-    // setting up or and filter
-    if (parseInt(req.body?.orAndFilter)) {
-      orAndFilter["$or"] = [];
-      for (const key of Object.keys(req.body?.filter)) {
-        let onFilter = { [key]: req.body?.filter?.[key] };
-        orAndFilter["$or"].push(onFilter);
-      }
-      if (!orAndFilter["$or"]?.length) {
-        delete orAndFilter["$or"];
-      }
-    } else {
-      orAndFilter["$and"] = [];
-      for (const key of Object.keys(req.body?.filter)) {
-        let onFilter = { [key]: req.body?.filter?.[key] };
-        orAndFilter["$and"].push(onFilter);
-      }
-      if (!orAndFilter["$and"]?.length) {
-        delete orAndFilter["$and"];
-      }
-    }
-
+    const { sorting, orAndFilter, filter } = parseRequest(req);
     data = await getStatDetailsService(orAndFilter, filter, req.body?.statFor);
     if (data) {
       res.status(200).json({
