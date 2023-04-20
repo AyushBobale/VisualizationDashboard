@@ -20,28 +20,9 @@ const addInitialService = async (data) => {
 };
 
 const getSortedDataService = async (data, filter, rangeFilters) => {
+  // console.log(filter);
   return DataModel.find({
-    $and: [
-      filter ? filter : {},
-      ...rangeFilters,
-      // { end_year: { $nin: ["", null] } },
-      // { intensity: { $nin: ["", null] } },
-      // { sector: { $nin: ["", null] } },
-      // { topic: { $nin: ["", null] } },
-      // { insight: { $nin: ["", null] } },
-      // { url: { $nin: ["", null] } },
-      // { region: { $nin: ["", null] } },
-      // { start_year: { $nin: ["", null] } },
-      // { impact: { $nin: ["", null] } },
-      // { added: { $nin: ["", null] } },
-      // { published: { $nin: ["", null] } },
-      // { country: { $nin: ["", null] } },
-      // { relevance: { $nin: ["", null] } },
-      // { pestle: { $nin: ["", null] } },
-      // { source: { $nin: ["", null] } },
-      // { title: { $nin: ["", null] } },
-      // { likelihood: { $nin: ["", null] } },
-    ],
+    $and: [filter ? filter : {}, ...rangeFilters],
   }).sort(data);
 };
 

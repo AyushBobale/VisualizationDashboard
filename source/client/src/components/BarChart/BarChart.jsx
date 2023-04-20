@@ -25,6 +25,7 @@ const BarChart = ({ data, label, bgColor, borderColor, title }) => {
         backgroundColor: bgColor,
         borderColor: borderColor,
         data: Object.values(data),
+        borderWidth: 1,
       },
     ],
   };

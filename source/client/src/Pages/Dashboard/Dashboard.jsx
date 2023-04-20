@@ -16,6 +16,7 @@ import { FilterTabs } from "../../components/FilterTabs/FilterTabs";
 import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
+import RadarChart from "../../components/RadarChart/RadarChart";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -36,30 +37,37 @@ function Dashboard() {
     ,
   ];
 
+  // 'rgba(255, 99, 132, 0.2)',
+  // 'rgba(54, 162, 235, 0.2)',
+  // 'rgba(255, 206, 86, 0.2)',
+  // 'rgba(75, 192, 192, 0.2)',
+  // 'rgba(153, 102, 255, 0.2)',
+  // 'rgba(255, 159, 64, 0.2)',
+
   const attributes = [
     {
       value: "Relevance",
       key: "relevance",
-      borderColor: "rgba(255,110,110,0.5)",
-      backGroundColor: "rgba(255,110,110,1)",
+      borderColor: "rgba(255, 99, 132, 0.8)",
+      backGroundColor: "rgba(255, 99, 132, 0.1)",
     },
     {
       value: "Intensity",
       key: "intensity",
-      borderColor: "rgba(110,255,110,0.5)",
-      backGroundColor: "rgba(110,255,110,1)",
+      borderColor: "rgba(54, 162, 235, 0.8)",
+      backGroundColor: "rgba(54, 162, 235, 0.1)",
     },
     {
       value: "Impact",
       key: "impact",
-      borderColor: "rgba(110,110,255,0.5)",
-      backGroundColor: "rgba(110,110,255,1)",
+      borderColor: "rgba(255, 206, 86, 0.8)",
+      backGroundColor: "rgba(255, 206, 86, 0.1)",
     },
     {
       value: "Likelihood",
       key: "likelihood",
-      borderColor: "rgba(255,255,110,0.5)",
-      backGroundColor: "rgba(255,255,110,1)",
+      borderColor: "rgba(75, 192, 192, 0.8)",
+      backGroundColor: "rgba(75, 192, 192, 0.1)",
     },
   ];
 
@@ -305,6 +313,27 @@ function Dashboard() {
             bgColor={[]}
             label={[`Combined Sum`]}
             title={`Combined Sum per year`}
+          />
+        </div>
+        <div className="chart-container elivate-shadow">
+          <RadarChart
+            data={formatedSortParamVsDataParamSum(
+              data,
+              selectdSortParam?.key,
+              selectedAttribute?.key
+            )}
+            borderColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.borderColor
+            }
+            bgColor={
+              attributes?.filter(
+                (elm) => selectedAttribute?.key == elm.key
+              )?.[0]?.backGroundColor
+            }
+            label={[`${selectedAttribute?.value} Sum`]}
+            title={`${selectedAttribute?.value} Sum per year`}
           />
         </div>
       </div>

@@ -30,6 +30,7 @@ const BarChartMultiple = ({
         backgroundColor: elm?.backGroundColor,
         borderColor: elm?.borderColor,
         data: Object.values(data)?.map((elmValue) => elmValue?.[elm?.key]),
+        borderWidth: 1,
       };
     }),
   };

@@ -33,10 +33,13 @@ export const FilterTabs = () => {
 
   const handleAndOr = () => {
     setAndOr(!andOr);
+  };
+
+  useEffect(() => {
     const params = Object.fromEntries(searchParams);
     params["orAndFilter"] = !andOr ? 0 : 1;
     setSearchParams(params);
-  };
+  }, [andOr]);
 
   useEffect(() => {
     setSelectedCountry(searchParams.get("country"));
@@ -45,7 +48,7 @@ export const FilterTabs = () => {
     setSelectedPestle(searchParams.get("pestle"));
     setSelectedSector(searchParams.get("sector"));
     setSelectedTopic(searchParams.get("topic"));
-    setSelectedTopic(searchParams.get("orAndFilter"));
+    setAndOr(parseInt(searchParams.get("orAndFilter")) ? true : false);
   }, [searchParams]);
 
   return (
