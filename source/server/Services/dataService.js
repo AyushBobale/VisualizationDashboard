@@ -181,8 +181,8 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
     pestle: aggAll?.[0]?.pestle,
     sector: aggAll?.[0]?.sector,
     topic: aggAll?.[0]?.topic,
-    start_year: aggAll?.[0]?.start_year?.sort(),
-    end_year: aggAll?.[0]?.end_year?.sort(),
+    start_year: aggAll?.[0]?.start_year,
+    end_year: aggAll?.[0]?.end_year,
   };
 
   return aggAll?.[0] || {};

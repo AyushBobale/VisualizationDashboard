@@ -24,13 +24,14 @@ import { StatCard } from "../../components/StatCard/StatCard";
 function Dashboard() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const data = useSelector((state) => state.rootReducer?.data?.data?.entries);
+  // const data = useSelector((state) => state.rootReducer?.data?.data?.entries);
   const distinct = useSelector(
     (state) => state.rootReducer?.data?.data?.distinct
   );
   const statDetails = useSelector(
     (state) => state.rootReducer?.data?.data?.statDetails
   );
+
   const options = [
     {
       value: "Start year",
@@ -85,6 +86,19 @@ function Dashboard() {
     },
   ];
 
+  //sorting params
+  const [selectdSortParam, setSelectedSortParam] = useState(options[0]);
+  const [selectdSummaryBy, setSelectedSummaryBy] = useState(
+    summarizedOptions[0]
+  );
+  const [selectdSummaryOf, setSelectedSummaryOf] = useState(attributes[0]);
+  const [selectdSortDirecton, setSelectedSortDirection] = useState();
+  const [selectdSortFrom, setSelectedSortFrom] = useState();
+  const [selectdSortTo, setSelectedSortTo] = useState();
+  const [sortOptions, setSortOptions] = useState([]);
+
+  const [selectedAttribute, setSelectedAttribute] = useState(attributes[0]);
+
   useEffect(() => {
     const reqData = {
       sortParam: searchParams.get("sortParam")
@@ -127,24 +141,10 @@ function Dashboard() {
           : undefined,
       },
     };
-    dispatch(getAllSortedDataThunk(reqData));
     dispatch(getAllDistinctDataThunk(reqData));
     dispatch(getStatDetailsThunk(reqData));
   }, [searchParams]);
 
-  // drop down
-  //sorting params
-  const [selectdSortParam, setSelectedSortParam] = useState(options[0]);
-  const [selectdSummaryBy, setSelectedSummaryBy] = useState(
-    summarizedOptions[0]
-  );
-  const [selectdSummaryOf, setSelectedSummaryOf] = useState(attributes[0]);
-  const [selectdSortDirecton, setSelectedSortDirection] = useState();
-  const [selectdSortFrom, setSelectedSortFrom] = useState();
-  const [selectdSortTo, setSelectedSortTo] = useState();
-  const [sortOptions, setSortOptions] = useState([]);
-
-  const [selectedAttribute, setSelectedAttribute] = useState(attributes[0]);
   // this use effect is used to refelect the changes from link to state vars
   useEffect(() => {
     setSelectedSortFrom(searchParams.get("from_data"));
@@ -191,41 +191,14 @@ function Dashboard() {
     }
   }, [searchParams.get("sortParam"), distinct]);
 
-  const formatedSortParamVsDataParamSum = (data, sortParam, dataParam) => {
-    let formattedData = {};
-    for (const idx in data) {
-      const year = data?.[idx]?.[sortParam];
-      if (formattedData?.[year]) {
-        formattedData[year] = formattedData[year] + data?.[idx]?.[dataParam];
-      } else {
-        formattedData[year] = data?.[idx]?.[dataParam];
-      }
+  const formatedSortParamVsDataParamSumNew = (data, sortParam, dataParam) => {
+    let formatted = {};
+    for (const elm of data || []) {
+      formatted[elm?._id] = elm?.[dataParam];
     }
-    delete formattedData[null];
-    return formattedData;
-  };
-
-  const formatedSortParamVsAll = (data, sortParam) => {
-    let formattedData = {};
-    for (const idx in data) {
-      const key = data?.[idx]?.[sortParam];
-      if (formattedData?.[key]) {
-        for (const value of attributes) {
-          formattedData[key][value?.key] =
-            formattedData[key][value?.key] + data?.[idx]?.[value?.key];
-        }
-      } else {
-        formattedData[key] = {};
-        for (const value of attributes) {
-          formattedData[key][value?.key] = data?.[idx]?.[value?.key]
-            ? data?.[idx]?.[value?.key]
-            : 0;
-        }
-      }
-    }
-    console.log(formattedData);
-    delete formattedData[null];
-    return formattedData;
+    delete formatted[""];
+    delete formatted[null];
+    return formatted;
   };
 
   const formatStatDetailsData = (data, attribute) => {
@@ -235,6 +208,20 @@ function Dashboard() {
     }
     return formatted;
   };
+
+  const formatedSortParamVsAllNew = (data) => {
+    let formattedData = {};
+    for (const elm of data || []) {
+      formattedData[elm?._id] = {};
+      formattedData[elm?._id]["intensity"] = elm?.["intensity"];
+      formattedData[elm?._id]["relevance"] = elm?.["relevance"];
+      formattedData[elm?._id]["impact"] = elm?.["impact"];
+      formattedData[elm?._id]["likelihood"] = elm?.["likelihood"];
+    }
+    return formattedData;
+  };
+
+  formatedSortParamVsAllNew(statDetails?.[selectdSortParam?.key]);
 
   return (
     <div className="dash-container">
@@ -315,8 +302,8 @@ function Dashboard() {
         </div>
         <div className="line1 chart-container elivate-shadow">
           <LineChart
-            data={formatedSortParamVsDataParamSum(
-              data,
+            data={formatedSortParamVsDataParamSumNew(
+              statDetails?.[selectdSortParam?.key],
               selectdSortParam?.key,
               selectedAttribute?.key
             )}
@@ -336,8 +323,8 @@ function Dashboard() {
         </div>
         <div className="bar1 chart-container elivate-shadow">
           <BarChart
-            data={formatedSortParamVsDataParamSum(
-              data,
+            data={formatedSortParamVsDataParamSumNew(
+              statDetails?.[selectdSortParam?.key],
               selectdSortParam?.key,
               selectedAttribute?.key
             )}
@@ -357,7 +344,9 @@ function Dashboard() {
         </div>
         <div className="bar2 chart-container elivate-shadow">
           <BarChartMultiple
-            data={formatedSortParamVsAll(data, selectdSortParam?.key)}
+            data={formatedSortParamVsAllNew(
+              statDetails?.[selectdSortParam?.key]
+            )}
             keys={attributes}
             borderColor={[]}
             bgColor={[]}
@@ -367,7 +356,9 @@ function Dashboard() {
         </div>
         <div className="line2 chart-container elivate-shadow">
           <LineChartMultiple
-            data={formatedSortParamVsAll(data, selectdSortParam?.key)}
+            data={formatedSortParamVsAllNew(
+              statDetails?.[selectdSortParam?.key]
+            )}
             keys={attributes}
             borderColor={[]}
             bgColor={[]}
@@ -376,10 +367,6 @@ function Dashboard() {
           />
         </div>
       </div>
-      {/* <PieChart data={formatedSortParamVsDataParamSum(data, chartSortParam "intensity")}  borderColor={borderColor} bgColor={bgColor} label={"Line Chart"}/> */}
-      {data?.map?.((elm) => {
-        return <p>{elm?.title}</p>;
-      })}
     </div>
   );
 }

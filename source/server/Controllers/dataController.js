@@ -106,6 +106,10 @@ const parseRequest = (req) => {
   return { sorting, orAndFilter, filter };
 };
 
+/**
+ * This function is deprecated and should not be used anymore.
+ * @deprecated
+ */
 const getAllSortedDataController = async (req, res, next) => {
   try {
     const { sorting, orAndFilter, filter } = parseRequest(req);
