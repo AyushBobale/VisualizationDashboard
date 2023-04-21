@@ -19,6 +19,7 @@ import { FilterTabs } from "../../components/FilterTabs/FilterTabs";
 import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
+import { StatCard } from "../../components/StatCard/StatCard";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -289,11 +290,15 @@ function Dashboard() {
         <div className="charts-grid"></div>
         <div className="dou1 chart-container elivate-shadow">
           <DoughnutChart
-            data={formatStatDetailsData(statDetails, selectdSummaryOf?.key)}
+            data={formatStatDetailsData(
+              statDetails?.[selectdSummaryBy?.key] || [],
+              selectdSummaryOf?.key
+            )}
             label={[`${selectdSummaryBy?.value} Sum`]}
             title={`${selectdSummaryOf?.value} Sum for each ${selectdSummaryBy?.value}`}
           />
         </div>
+        <StatCard attribute={selectdSummaryOf} />
         <FilterTabs />
 
         <div className="filter-tabs-root-cont var-select">

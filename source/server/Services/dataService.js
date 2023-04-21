@@ -56,8 +56,6 @@ const getDistinctElemService = async (filter) => {
     },
   ]);
 
-  console.log(uniqueValues?.[0]?.end_year?.sort());
-
   return {
     end_year: uniqueValues?.[0]?.end_year?.sort(),
     start_year: uniqueValues?.[0]?.start_year?.sort(),
@@ -71,26 +69,87 @@ const getDistinctElemService = async (filter) => {
 };
 
 const getStatDetailsService = async (filter, rangeFilters, statFor) => {
-  const aggDynamic = await DataModel.aggregate([
+  const aggAll = await DataModel.aggregate([
     {
       $match: {
         $and: [filter ? filter : {}, ...rangeFilters],
       },
     },
     {
-      $group: {
-        _id: `$${statFor}`,
-        intensity: { $sum: "$intensity" },
-        relevance: { $sum: "$relevance" },
-        impact: { $sum: "$impact" },
-        likelihood: { $sum: "$likelihood" },
+      $facet: {
+        region: [
+          {
+            $group: {
+              _id: `$region`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
+        country: [
+          {
+            $group: {
+              _id: `$country`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
+        source: [
+          {
+            $group: {
+              _id: `$source`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
+        pestle: [
+          {
+            $group: {
+              _id: `$pestle`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
+        sector: [
+          {
+            $group: {
+              _id: `$sector`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
+        topic: [
+          {
+            $group: {
+              _id: `$topic`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+        ],
       },
     },
   ]);
 
-  // console.log(aggDynamic);
+  // console.log(aggAll?.[0]?.region);
 
-  return aggDynamic || [];
+  return aggAll?.[0] || {};
 };
 
 export {

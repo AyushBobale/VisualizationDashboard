@@ -22,7 +22,7 @@
   grid-template-areas:
     "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"
     "filt   filt    filt    filt    filt    filt"
-    "dou1   dou1    dou1    dou1    dou1    dou1"
+    "dou1   dou1    dou1    dou1    stat    stat"
     "var    var     var     var     var     var"
     "line1  line1   bar2    bar2    bar2    bar2"
     "bar1   bar1    bar2    bar2    bar2    bar2"
@@ -47,6 +47,12 @@
 .dou1 {
   grid-area: dou1;
   width: 100%;
+}
+
+.stat {
+  grid-area: stat;
+  width: 100%;
+  padding: 1rem;
 }
 
 .filt {
