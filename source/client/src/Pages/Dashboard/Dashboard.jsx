@@ -206,6 +206,8 @@ function Dashboard() {
     for (const elm of data) {
       if (elm?._id) formatted[elm?.["_id"]] = elm?.[attribute];
     }
+    delete formatted[""];
+    delete formatted[null];
     return formatted;
   };
 
@@ -218,10 +220,10 @@ function Dashboard() {
       formattedData[elm?._id]["impact"] = elm?.["impact"];
       formattedData[elm?._id]["likelihood"] = elm?.["likelihood"];
     }
+    delete formattedData[""];
+    delete formattedData[null];
     return formattedData;
   };
-
-  formatedSortParamVsAllNew(statDetails?.[selectdSortParam?.key]);
 
   return (
     <div className="dash-container">
