@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import "./StatCard.css";
+
+import React, { useEffect, useState } from "react";
 
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,6 +10,7 @@ export const StatCard = () => {
   const statDetails = useSelector(
     (state) => state.rootReducer?.data?.data?.statDetails
   );
+  const [highestKeys, setHighestKeys] = useState();
 
   const getHighestKeys = () => {
     // use search params here
@@ -89,15 +92,47 @@ export const StatCard = () => {
     return formatted;
   };
 
-  getHighestKeys();
+  useEffect(() => {
+    setHighestKeys(getHighestKeys());
+  }, [searchParams, statDetails]);
 
   return (
     <div className="stat chart-container elivate-shadow">
-      StatCard
+      Highest {searchParams.get("summaryOf")}
       <div className="stats-inner-container">
         <div>
-          <span>Country </span>
-          <span></span>
+          <span>Region : </span> <span>{highestKeys?.region?._id}</span>
+          <span>{highestKeys?.region?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Country : </span> <span>{highestKeys?.country?._id}</span>
+          <span>{highestKeys?.country?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Source : </span> <span>{highestKeys?.source?._id}</span>
+          <span>{highestKeys?.source?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Pestle : </span> <span>{highestKeys?.pestle?._id}</span>
+          <span>{highestKeys?.pestle?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Sector : </span> <span>{highestKeys?.sector?._id}</span>
+          <span>{highestKeys?.sector?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Topic : </span> <span>{highestKeys?.topic?._id}</span>
+          <span>{highestKeys?.topic?.[searchParams.get("summaryOf")]}</span>
+        </div>
+        <div>
+          <span>Start Year : </span> <span>{highestKeys?.start_year?._id}</span>
+          <span>
+            {highestKeys?.start_year?.[searchParams.get("summaryOf")]}
+          </span>
+        </div>
+        <div>
+          <span>End Year : </span> <span>{highestKeys?.end_year?._id}</span>
+          <span>{highestKeys?.end_year?.[searchParams.get("summaryOf")]}</span>
         </div>
       </div>
     </div>
