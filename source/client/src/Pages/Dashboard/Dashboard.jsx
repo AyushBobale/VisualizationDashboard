@@ -223,6 +223,7 @@ function Dashboard() {
         }
       }
     }
+    console.log(formattedData);
     delete formattedData[null];
     return formattedData;
   };

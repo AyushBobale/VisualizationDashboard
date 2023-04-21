@@ -69,6 +69,9 @@ const getDistinctElemService = async (filter) => {
 };
 
 const getStatDetailsService = async (filter, rangeFilters, statFor) => {
+  // console.log({
+  //   $and: [filter ? filter : {}, ...rangeFilters],
+  // });
   const aggAll = await DataModel.aggregate([
     {
       $match: {
@@ -143,11 +146,44 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
             },
           },
         ],
+        start_year: [
+          {
+            $group: {
+              _id: `$start_year`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+          { $sort: { _id: 1 } },
+        ],
+        end_year: [
+          {
+            $group: {
+              _id: `$end_year`,
+              intensity: { $sum: "$intensity" },
+              relevance: { $sum: "$relevance" },
+              impact: { $sum: "$impact" },
+              likelihood: { $sum: "$likelihood" },
+            },
+          },
+          { $sort: { _id: 1 } },
+        ],
       },
     },
   ]);
 
-  // console.log(aggAll?.[0]?.region);
+  const data = {
+    region: aggAll?.[0]?.region,
+    country: aggAll?.[0]?.country,
+    source: aggAll?.[0]?.source,
+    pestle: aggAll?.[0]?.pestle,
+    sector: aggAll?.[0]?.sector,
+    topic: aggAll?.[0]?.topic,
+    start_year: aggAll?.[0]?.start_year?.sort(),
+    end_year: aggAll?.[0]?.end_year?.sort(),
+  };
 
   return aggAll?.[0] || {};
 };
