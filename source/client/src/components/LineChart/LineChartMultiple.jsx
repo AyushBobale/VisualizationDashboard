@@ -3,36 +3,36 @@ import { Line } from "react-chartjs-2";
 import React from "react";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
-function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
+function LineChartMultiple({ data, title, keys, options }) {
   const responsiveWindow = useResponsiveWindow();
-  const options = {
-    scales: {
-      y: {
-        ticks: {
-          font: {
-            size: 10,
-          },
-        },
-      },
-      x: {
-        ticks: {
-          font: {
-            size: 10,
-          },
-        },
-      },
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: title,
-      },
-    },
-  };
+  // const options = {
+  //   scales: {
+  //     y: {
+  //       ticks: {
+  //         font: {
+  //           size: 10,
+  //         },
+  //       },
+  //     },
+  //     x: {
+  //       ticks: {
+  //         font: {
+  //           size: 10,
+  //         },
+  //       },
+  //     },
+  //   },
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       position: "top",
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: title,
+  //     },
+  //   },
+  // };
 
   const dataNew = {
     labels: Object.keys(data),

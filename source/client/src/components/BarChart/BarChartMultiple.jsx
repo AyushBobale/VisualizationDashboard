@@ -10,20 +10,21 @@ const BarChartMultiple = ({
   borderColor,
   title,
   keys,
+  options,
 }) => {
   const responsiveWindow = useResponsiveWindow();
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: title,
-      },
-    },
-  };
+  // const options = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       position: "top",
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: title,
+  //     },
+  //   },
+  // };
   const dataNew = {
     labels: Object.keys(data),
     datasets: keys?.map((elm, idx) => {

@@ -37,6 +37,10 @@ h3 {
   font-size: 1.2rem;
 }
 
+canvas {
+  /* margin: auto; */
+}
+
 /* https://colorhunt.co/palette/635985443c6839305318122b */
 
 .root-container {

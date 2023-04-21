@@ -20,11 +20,12 @@ import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
 import PieChart from "../../components/Piechart/PieChart";
 import { StatCard } from "../../components/StatCard/StatCard";
+import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
 function Dashboard() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const data = useSelector((state) => state.rootReducer?.data?.data?.entries);
+  const responsiveWindow = useResponsiveWindow();
   const distinct = useSelector(
     (state) => state.rootReducer?.data?.data?.distinct
   );
@@ -233,6 +234,45 @@ function Dashboard() {
     return formattedData;
   };
 
+  const createOptions = (title, hideLegend, hideScales) => {
+    return {
+      scales: {
+        y: {
+          display: !hideScales,
+          ticks: {
+            font: {
+              size: responsiveWindow?.phone ? 8 : null,
+            },
+          },
+        },
+        x: {
+          display: !hideScales,
+          ticks: {
+            font: {
+              size: responsiveWindow?.phone ? 10 : 12,
+            },
+          },
+        },
+      },
+      responsive: true,
+      plugins: {
+        legend: {
+          display: !hideLegend,
+          position: "top",
+          labels: {
+            font: {
+              size: responsiveWindow?.phone ? 10 : 12,
+            },
+          },
+        },
+        title: {
+          display: true,
+          text: title,
+        },
+      },
+    };
+  };
+
   return (
     <div className="dash-container">
       <div className="filter-tabs-root-cont">
@@ -292,6 +332,11 @@ function Dashboard() {
               statDetails?.[selectdSummaryBy?.key] || [],
               selectdSummaryOf?.key
             )}
+            options={createOptions(
+              `${selectdSummaryOf?.value} Sum for each ${selectdSummaryBy?.value}`,
+              true,
+              true
+            )}
             label={[`${selectdSummaryBy?.value} Sum`]}
             title={`${selectdSummaryOf?.value} Sum for each ${selectdSummaryBy?.value}`}
           />
@@ -329,6 +374,7 @@ function Dashboard() {
             }
             label={`${selectedAttribute?.value} Sum`}
             title={`${selectedAttribute?.value} Sum per year`}
+            options={createOptions(`${selectedAttribute?.value} Sum per year`)}
           />
         </div>
         <div className="bar1 chart-container elivate-shadow">
@@ -350,6 +396,7 @@ function Dashboard() {
             }
             label={[`${selectedAttribute?.value} Sum`]}
             title={`${selectedAttribute?.value} Sum per year`}
+            options={createOptions(`${selectedAttribute?.value} Sum per year`)}
           />
         </div>
         <div className="bar2 chart-container elivate-shadow">
@@ -362,6 +409,7 @@ function Dashboard() {
             bgColor={[]}
             label={[`${"temp"} Sum`]}
             title={`Combined Sum per year`}
+            options={createOptions(`Combined Sum per year`)}
           />
         </div>
         <div className="line2 chart-container elivate-shadow">
@@ -374,6 +422,7 @@ function Dashboard() {
             bgColor={[]}
             label={[`Combined Sum`]}
             title={`Combined Sum per year`}
+            options={createOptions(`Combined Sum per year`)}
           />
         </div>
       </div>

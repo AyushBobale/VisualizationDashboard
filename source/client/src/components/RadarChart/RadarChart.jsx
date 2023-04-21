@@ -2,19 +2,26 @@ import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import React from "react";
 
-const DoughnutChart = ({ data, label, bgColor, borderColor, title }) => {
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: title,
-      },
-    },
-  };
+const DoughnutChart = ({
+  data,
+  label,
+  bgColor,
+  borderColor,
+  title,
+  options,
+}) => {
+  // const options = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: title,
+  //     },
+  //   },
+  // };
   const dataNew = {
     labels: Object.keys(data),
     datasets: [

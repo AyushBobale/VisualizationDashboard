@@ -3,20 +3,20 @@ import { Line } from "react-chartjs-2";
 import React from "react";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
-function LineChart({ data, label, bgColor, borderColor, title }) {
+function LineChart({ data, label, bgColor, borderColor, title, options }) {
   const responsiveWindow = useResponsiveWindow();
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: title,
-      },
-    },
-  };
+  // const options = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: title,
+  //     },
+  //   },
+  // };
 
   const dataTemp = {
     labels: Object.keys(data),
