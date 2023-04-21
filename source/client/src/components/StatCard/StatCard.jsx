@@ -88,7 +88,6 @@ export const StatCard = () => {
         : obj
     );
 
-    console.log(formatted);
     return formatted;
   };
 

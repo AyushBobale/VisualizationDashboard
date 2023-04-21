@@ -33,5 +33,5 @@
   background: var(--primary-hover);
   box-shadow: none;
   border-radius: 0px;
-  color: #ffffff;
+  color: var(--primary-font-color);
 }

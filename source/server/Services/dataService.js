@@ -39,6 +39,8 @@ const getDistinctElemService = async (filter) => {
         pestle: { $addToSet: "$pestle" },
         source: { $addToSet: "$source" },
         country: { $addToSet: "$country" },
+        // added: { $addToSet: "$added" },
+        // published: { $addToSet: "$published" },
       },
     },
     {
@@ -52,6 +54,8 @@ const getDistinctElemService = async (filter) => {
         pestle: 1,
         source: 1,
         country: 1,
+        // added: 1,
+        // published: 1,
       },
     },
   ]);
@@ -65,13 +69,15 @@ const getDistinctElemService = async (filter) => {
     pestle: uniqueValues?.[0]?.pestle?.sort(),
     source: uniqueValues?.[0]?.source?.sort(),
     country: uniqueValues?.[0]?.country?.sort(),
+    // added: uniqueValues?.[0]?.added?.sort(),
+    // publised: uniqueValues?.[0]?.published?.sort(),
   };
 };
 
 const getStatDetailsService = async (filter, rangeFilters, statFor) => {
-  // console.log({
-  //   $and: [filter ? filter : {}, ...rangeFilters],
-  // });
+  console.log({
+    $and: [filter ? filter : {}, ...rangeFilters],
+  });
   const aggAll = await DataModel.aggregate([
     {
       $match: {

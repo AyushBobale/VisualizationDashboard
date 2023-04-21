@@ -1,10 +1,10 @@
 import "./FilterTab.css";
 
 import React, { useEffect, useState } from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
 
 import Dropdown from "../Dropdown/Dropdown";
 import ToggleButton from "../ToggleButton/ToggleButton";
-import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const FilterTabs = () => {
@@ -28,7 +28,7 @@ export const FilterTabs = () => {
     searchParams.delete("pestle");
     searchParams.delete("sector");
     searchParams.delete("topic");
-    setSearchParams(searchParams);
+    setSearchParams(createSearchParams({}));
   };
 
   const handleAndOr = () => {

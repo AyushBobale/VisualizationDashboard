@@ -1,9 +1,15 @@
 :root {
-  --primary: #212121;
-  --primary-hover: #383838;
-  --primary-border: #748b9c;
-  --primary-font-color: #f0e3e3;
-  --primary-button: #2f576e;
+  --primary: #f7f7f7;
+  --primary-hover: #f2e7d5;
+  --primary-border: #6d9886;
+  --primary-font-color: #393e46;
+  --primary-button: #f2e7d5;
+  --primary-font-color: #393e46;
+  --primary-button-hover-font-color: #393e46;
+  --primary-button-hover: #f2e7d5;
+  --bg-r: 96;
+  --bg-g: 150;
+  --bg-b: 180;
 }
 
 html,
@@ -52,11 +58,11 @@ h3 {
 
 .elivate-shadow {
   cursor: pointer;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.1);
 }
 
 .elivate-shadow:hover {
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 4px rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.4);
 }
 
 .responsive-chart-container {
@@ -73,6 +79,8 @@ h3 {
 
 .primary-btn:hover {
   cursor: pointer;
+  background: var(--primary-button-hover);
+  color: var(--primary-button-hover-font-color);
 }
 
 /* scroll bar */

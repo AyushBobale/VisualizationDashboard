@@ -41,6 +41,14 @@ function Dashboard() {
       value: "End year",
       key: "end_year",
     },
+    {
+      value: "Publised Date",
+      key: "published",
+    },
+    {
+      value: "Added Date",
+      key: "added",
+    },
     ,
   ];
 
