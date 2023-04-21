@@ -52,7 +52,7 @@ h3 {
 }
 
 .outlet-container {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -108,4 +108,34 @@ h3 {
 
 ::-webkit-scrollbar-thumb {
   min-height: 20px;
+}
+
+@media screen and (max-width: 1500px) {
+  .nav-outlet-container {
+    padding: 0rem 5rem;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .nav-outlet-container {
+    padding: 0rem 4rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  * {
+    font-size: 0.875rem;
+  }
+  .nav-outlet-container {
+    padding: 0rem 3rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  * {
+    font-size: 0.8rem;
+  }
+  .nav-outlet-container {
+    padding: 0rem 0rem;
+  }
 }

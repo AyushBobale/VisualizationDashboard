@@ -28,6 +28,7 @@
     "bar1   bar1    bar2    bar2    bar2    bar2"
     "line2  line2   line2   line2   line2   line2";
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(7 1fr);
 }
 
 .chart-container {
@@ -35,23 +36,27 @@
   border-radius: 6px;
 }
 
-.chart-container > div {
+.chart-container {
   margin: 1rem;
+  max-width: 100%;
+}
+
+.inner-chart-container {
+  padding: 0.5rem;
+  height: 100%;
+  max-width: 100%;
 }
 
 .dfilt {
-  width: 100%;
   grid-area: dfilt;
 }
 
 .dou1 {
   grid-area: dou1;
-  width: 100%;
 }
 
 .stat {
   grid-area: stat;
-  width: 100%;
   padding: 1rem;
 }
 
@@ -59,31 +64,72 @@
   display: flex;
   flex-direction: column;
   grid-area: filt;
-  width: 100%;
   gap: 0.5rem;
 }
 
 .var-select {
   grid-area: var;
-  width: 100%;
 }
 
 .line1 {
   grid-area: line1;
-  width: 100%;
 }
 
 .line2 {
   grid-area: line2;
-  width: 100%;
 }
 
 .bar1 {
   grid-area: bar1;
-  width: 100%;
 }
 
 .bar2 {
   grid-area: bar2;
-  width: 100%;
+}
+
+@media screen and (max-width: 1500px) {
+  .charts-grid {
+    grid-template-areas:
+      "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"
+      "filt   filt    filt    filt    filt    filt"
+      "dou1   dou1    dou1    stat    stat    stat"
+      "var    var     var     var     var     var"
+      "line1  line1   bar2    bar2    bar2    bar2"
+      "bar1   bar1    bar2    bar2    bar2    bar2"
+      "line2  line2   line2   line2   line2   line2";
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .charts-grid {
+    grid-template-areas:
+      "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"
+      "filt   filt    filt    filt    filt    filt"
+      "dou1   dou1    dou1    stat    stat    stat"
+      "var    var     var     var     var     var"
+      "line1  line1   line1    bar2    bar2    bar2"
+      "bar1   bar1    bar1    line2    line2    line2";
+    /* "line2  line2   line2   line2   line2   line2"; */
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .chart-container {
+    margin: 0rem;
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9 1fr);
+    grid-template-areas:
+      "dfilt"
+      "filt"
+      "dou1"
+      "stat"
+      "var"
+      "line1"
+      "bar1"
+      "line2"
+      "bar2";
+    /* "line2  line2   line2   line2   line2   line2"; */
+  }
 }

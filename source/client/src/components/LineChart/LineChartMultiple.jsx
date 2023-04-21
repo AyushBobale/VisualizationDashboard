@@ -1,13 +1,28 @@
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import React from "react";
+import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
 function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
+  const responsiveWindow = useResponsiveWindow();
   const options = {
+    scales: {
+      y: {
+        ticks: {
+          font: {
+            size: 10,
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2,
-    // resizeDelay: 0,
     plugins: {
       legend: {
         position: "top",
@@ -32,7 +47,11 @@ function LineChartMultiple({ data, label, bgColor, borderColor, title, keys }) {
   };
   return (
     <div className="inner-chart-container">
-      <Line data={dataNew} options={options} />
+      <Line
+        data={dataNew}
+        options={options}
+        height={responsiveWindow?.phone ? 250 : null}
+      />
     </div>
   );
 }

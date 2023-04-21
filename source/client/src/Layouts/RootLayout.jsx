@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 import Sidebar from "../components/Sidebar/Sidebar";
 
 function RootLayout() {
-  const [sideBar, setSideBar] = useState(true);
+  const [sideBar, setSideBar] = useState(false);
   return (
     <div className="root-container">
       <Sidebar sideBar={sideBar} setSideBar={setSideBar} />

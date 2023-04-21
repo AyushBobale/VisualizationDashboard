@@ -1,12 +1,12 @@
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import React from "react";
+import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
 const BarChart = ({ data, label, bgColor, borderColor, title }) => {
+  const responsiveWindow = useResponsiveWindow();
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 1.8,
     plugins: {
       legend: {
         display: false,
@@ -31,7 +31,11 @@ const BarChart = ({ data, label, bgColor, borderColor, title }) => {
   };
   return (
     <div className="inner-chart-container">
-      <Bar data={dataNew} options={options} />
+      <Bar
+        data={dataNew}
+        options={options}
+        height={responsiveWindow?.phone ? 200 : null}
+      />
     </div>
   );
 };

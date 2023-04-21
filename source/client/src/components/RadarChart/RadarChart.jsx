@@ -5,8 +5,6 @@ import React from "react";
 const DoughnutChart = ({ data, label, bgColor, borderColor, title }) => {
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 1.8,
     plugins: {
       legend: {
         display: false,
@@ -40,7 +38,7 @@ const DoughnutChart = ({ data, label, bgColor, borderColor, title }) => {
     // ],
   };
   return (
-    <div>
+    <div className="inner-chart-container">
       <Doughnut data={dataNew} options={options} />
     </div>
   );

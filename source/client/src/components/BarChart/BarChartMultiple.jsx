@@ -1,6 +1,7 @@
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import React from "react";
+import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
 const BarChartMultiple = ({
   data,
@@ -10,6 +11,7 @@ const BarChartMultiple = ({
   title,
   keys,
 }) => {
+  const responsiveWindow = useResponsiveWindow();
   const options = {
     responsive: true,
     plugins: {
@@ -36,7 +38,11 @@ const BarChartMultiple = ({
   };
   return (
     <div className="inner-chart-container">
-      <Bar data={dataNew} options={options} />
+      <Bar
+        data={dataNew}
+        options={options}
+        height={responsiveWindow?.phone ? 250 : null}
+      />
     </div>
   );
 };
