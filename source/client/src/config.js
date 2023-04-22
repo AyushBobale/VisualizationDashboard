@@ -1,4 +1,4 @@
-export const API_ROOT = "http://localhost:5000/api";
+export const API_ROOT = "https://visualization-dash-api.onrender.com/api";
 export const LINKS = {
   API_ROOT: API_ROOT,
   GET_DATA: `${API_ROOT}/data`,
