@@ -98,41 +98,47 @@ export const StatCard = () => {
   return (
     <div className="stat chart-container elivate-shadow">
       Highest {searchParams.get("summaryOf")}
-      <div className="stats-inner-container">
+      {/* <div className="stats-inner-container"> */}
+      <div className="stat-table">
+        <div className="stat-table-header">
+          <span>Attribute </span> <span>Value</span>
+          <span>{searchParams.get("summaryOf")}</span>
+        </div>
         <div>
-          <span>Region : </span> <span>{highestKeys?.region?._id}</span>
+          <span>Region </span> <span>{highestKeys?.region?._id}</span>
           <span>{highestKeys?.region?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Country : </span> <span>{highestKeys?.country?._id}</span>
+          <span>Country </span> <span>{highestKeys?.country?._id}</span>
           <span>{highestKeys?.country?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Source : </span> <span>{highestKeys?.source?._id}</span>
+          <span>Source </span> <span>{highestKeys?.source?._id}</span>
           <span>{highestKeys?.source?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Pestle : </span> <span>{highestKeys?.pestle?._id}</span>
+          <span>Pestle </span> <span>{highestKeys?.pestle?._id}</span>
           <span>{highestKeys?.pestle?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Sector : </span> <span>{highestKeys?.sector?._id}</span>
+          <span>Sector </span> <span>{highestKeys?.sector?._id}</span>
           <span>{highestKeys?.sector?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Topic : </span> <span>{highestKeys?.topic?._id}</span>
+          <span>Topic </span> <span>{highestKeys?.topic?._id}</span>
           <span>{highestKeys?.topic?.[searchParams.get("summaryOf")]}</span>
         </div>
         <div>
-          <span>Start Year : </span> <span>{highestKeys?.start_year?._id}</span>
+          <span>Start Year </span> <span>{highestKeys?.start_year?._id}</span>
           <span>
             {highestKeys?.start_year?.[searchParams.get("summaryOf")]}
           </span>
         </div>
         <div>
-          <span>End Year : </span> <span>{highestKeys?.end_year?._id}</span>
+          <span>End Year </span> <span>{highestKeys?.end_year?._id}</span>
           <span>{highestKeys?.end_year?.[searchParams.get("summaryOf")]}</span>
         </div>
+        {/* </div> */}
       </div>
     </div>
   );

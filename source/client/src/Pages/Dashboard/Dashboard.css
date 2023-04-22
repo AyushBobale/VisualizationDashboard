@@ -36,7 +36,6 @@
   border-radius: 6px;
   /* max-height: 30rem; */
   /* min-height: 25rem; */
-  margin: 1rem;
 }
 
 .inner-chart-container {
@@ -60,6 +59,7 @@
 .stat {
   grid-area: stat;
   padding: 1rem;
+  height: 40rem;
 }
 
 .filt {
@@ -102,7 +102,7 @@
   }
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .charts-grid {
     grid-template-areas:
       "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"
