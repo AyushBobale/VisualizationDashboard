@@ -11,6 +11,9 @@ export const Home = () => {
       <h1>Home</h1>
       <br />
       <Link to={ROUTES.DASHBOARD}>Go to Dashboard</Link>
+      <br />
+      <br />
+      <Link to={ROUTES.GITHUB}>Visit My Github</Link>
     </div>
   );
 };

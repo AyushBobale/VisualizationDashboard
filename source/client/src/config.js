@@ -9,6 +9,7 @@ export const LINKS = {
 
 export const ROUTER_ROOT = "/";
 export const ROUTES = {
+  GITHUB: "https://github.com/AyushBobale/VisualizationDashboard",
   ROOT: ROUTER_ROOT,
   DASHBOARD: `${ROUTER_ROOT}dashboard`,
 };
