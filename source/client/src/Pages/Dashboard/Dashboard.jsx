@@ -18,8 +18,8 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import { FilterTabs } from "../../components/FilterTabs/FilterTabs";
 import LineChart from "../../components/LineChart/LineChart";
 import LineChartMultiple from "../../components/LineChart/LineChartMultiple";
-import PieChart from "../../components/Piechart/PieChart";
 import { StatCard } from "../../components/StatCard/StatCard";
+import { Tooltip } from "react-tooltip";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
 function Dashboard(props) {
@@ -190,6 +190,7 @@ function Dashboard(props) {
     const params = Object.fromEntries(searchParams);
     params["sortValue"] = 1;
     params["summaryBy"] = selectdSummaryBy?.key;
+    params["summaryOf"] = selectdSummaryOf?.key;
     setSearchParams(createSearchParams(params));
     setSelectedSortDirection(1);
     setSortOptions(distinct?.[searchParams.get("sortParam")]);
@@ -277,7 +278,8 @@ function Dashboard(props) {
     <div className="dash-container">
       <div className="filter-tabs-root-cont">
         <div>
-          Search By
+          <p id="search-by-drop">Search By</p>
+
           <Dropdown
             paramName={"sortParam"}
             options={options}
@@ -285,17 +287,28 @@ function Dashboard(props) {
             onSelectedOptionChange={setSelectedSortParam}
           />
         </div>
+        <Tooltip anchorSelect="#search-by-drop" className="dark" place="left">
+          This is the primary range in which the data is searched by any of the
+          properities in the dropdown
+        </Tooltip>
         <div>
-          From
+          <p id="search-from-drop">From</p>
           <Dropdown
             paramName={"from_data"}
             options={sortOptions}
             selectedOption={selectdSortFrom}
             onSelectedOptionChange={setSelectedSortFrom}
           />
+          <Tooltip
+            anchorSelect="#search-from-drop"
+            className="dark"
+            place="left"
+          >
+            If no options are visible, please select Search By Parameter.
+          </Tooltip>
         </div>
         <div>
-          To
+          <p id="search-from-drop">From</p>
           <Dropdown
             paramName={"to_data"}
             options={sortOptions}
@@ -307,26 +320,46 @@ function Dashboard(props) {
       <div className="charts-grid">
         <div className="filter-tabs-root-cont dfilt">
           <div>
-            Summarize for
+            <p id="summarize-for-drop">Sumarize for</p>
             <Dropdown
               paramName={"summaryBy"}
               options={summarizedOptions}
               selectedOption={selectdSummaryBy}
               onSelectedOptionChange={setSelectedSummaryBy}
             />
+            <Tooltip
+              anchorSelect="#summarize-for-drop"
+              className="dark"
+              place="left"
+            >
+              The below doughnut chart summarises data based on this factor.{" "}
+              <br />
+              For example, sector will give a summary of energy, retail, etc.
+            </Tooltip>
           </div>
           <div>
-            Summary of
+            <p id="summarize-of-drop">Summary of</p>
             <Dropdown
               paramName={"summaryOf"}
               options={attributes}
               selectedOption={selectdSummaryOf}
               onSelectedOptionChange={setSelectedSummaryOf}
             />
+            <Tooltip
+              anchorSelect="#summarize-of-drop"
+              className="dark"
+              place="left"
+            >
+              The below doughnut chart sums data based on this factor. <br />
+              For example, Intensity will give you the sum of each Sector.
+            </Tooltip>
           </div>
         </div>
         <div className="charts-grid"></div>
-        <div className="dou1 chart-container elivate-shadow">
+        <div className="dou1 chart-container elivate-shadow" id="dou-chart">
+          <Tooltip anchorSelect="#dou-chart" className="dark" place="top">
+            Summed up attribute distribution by selecte Summary For parameter.
+          </Tooltip>
           <DoughnutChart
             data={formatStatDetailsData(
               statDetails?.[selectdSummaryBy?.key] || [],
@@ -346,7 +379,7 @@ function Dashboard(props) {
 
         <div className="filter-tabs-root-cont var-select">
           <div>
-            Attribute
+            <p id="att-drop"> Attribute</p>
             <Dropdown
               paramName={"attribute"}
               options={attributes}
@@ -354,8 +387,12 @@ function Dashboard(props) {
               onSelectedOptionChange={setSelectedAttribute}
             />
           </div>
+          <Tooltip anchorSelect="#att-drop" className="dark" place="left">
+            Selects the attribute for the below to charts to isolate and see a
+            single attribute.
+          </Tooltip>
         </div>
-        <div className="line1 chart-container elivate-shadow">
+        <div className="line1 chart-container elivate-shadow" id="single-chart">
           <LineChart
             data={formatedSortParamVsDataParamSumNew(
               statDetails?.[selectdSortParam?.key],
@@ -377,7 +414,7 @@ function Dashboard(props) {
             options={createOptions(`${selectedAttribute?.value} Sum per year`)}
           />
         </div>
-        <div className="bar1 chart-container elivate-shadow">
+        <div className="bar1 chart-container elivate-shadow" id="single-chart">
           <BarChart
             data={formatedSortParamVsDataParamSumNew(
               statDetails?.[selectdSortParam?.key],
@@ -399,7 +436,13 @@ function Dashboard(props) {
             options={createOptions(`${selectedAttribute?.value} Sum per year`)}
           />
         </div>
-        <div className="bar2 chart-container elivate-shadow">
+        <Tooltip anchorSelect="#single-chart" className="dark" place="left">
+          Plots the chart between ranges selected above for the attribute
+        </Tooltip>
+        <div
+          className="bar2 chart-container elivate-shadow"
+          id="multiple-chart"
+        >
           <BarChartMultiple
             data={formatedSortParamVsAllNew(
               statDetails?.[selectdSortParam?.key]
@@ -412,7 +455,10 @@ function Dashboard(props) {
             options={createOptions(`Combined Sum per year`)}
           />
         </div>
-        <div className="line2 chart-container elivate-shadow">
+        <div
+          className="line2 chart-container elivate-shadow"
+          id="multiple-chart"
+        >
           <LineChartMultiple
             data={formatedSortParamVsAllNew(
               statDetails?.[selectdSortParam?.key]
@@ -425,6 +471,9 @@ function Dashboard(props) {
             options={createOptions(`Combined Sum per year`)}
           />
         </div>
+        <Tooltip anchorSelect="#multiple-chart" className="dark" place="top">
+          Plots the chart between ranges selected above for all attributes.
+        </Tooltip>
       </div>
     </div>
   );

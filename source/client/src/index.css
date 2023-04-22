@@ -1,15 +1,24 @@
 :root {
   --primary: #f7f7f7;
-  --primary-hover: #f2e7d5;
+  --primary-hover: #e0e9e5;
   --primary-border: #6d9886;
-  --primary-font-color: #393e46;
-  --primary-button: #f2e7d5;
-  --primary-font-color: #393e46;
-  --primary-button-hover-font-color: #393e46;
-  --primary-button-hover: #f2e7d5;
-  --bg-r: 96;
-  --bg-g: 150;
-  --bg-b: 180;
+  --primary-font-color: #2b3d36;
+  --primary-button: #e0e9e5;
+  --primary-font-color: #2b3d36;
+  --primary-button-hover-font-color: #d5e1dc;
+  --primary-button-hover: #547768;
+  /* rgb(109,152,134) */
+  --bg-r: 109;
+  --bg-g: 152;
+  --bg-b: 134;
+
+  --rt-color-white: #fff !important;
+  --rt-color-dark: #547768 !important;
+  --rt-color-success: #8dc572 !important;
+  --rt-color-error: #be6464 !important;
+  --rt-color-warning: #f0ad4e !important;
+  --rt-color-info: #337ab7 !important;
+  --rt-opacity: 0.8 !important;
 }
 
 html,
@@ -114,6 +123,39 @@ h3 {
 
 ::-webkit-scrollbar-thumb {
   min-height: 20px;
+}
+
+/* react tool tip */
+/** Types variant **/
+.dark {
+  max-width: fit-content;
+  background: var(--rt-color-dark);
+  color: var(--rt-color-white);
+}
+
+.light {
+  background-color: var(--rt-color-white);
+  color: var(--rt-color-dark);
+}
+
+.success {
+  background-color: var(--rt-color-success);
+  color: var(--rt-color-white);
+}
+
+.warning {
+  background-color: var(--rt-color-warning);
+  color: var(--rt-color-white);
+}
+
+.error {
+  background-color: var(--rt-color-error);
+  color: var(--rt-color-white);
+}
+
+.info {
+  background-color: var(--rt-color-info);
+  color: var(--rt-color-white);
 }
 
 @media screen and (max-width: 1500px) {

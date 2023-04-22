@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const DoughnutChart = ({ data, bgColor, borderColor, options }) => {
   const sideBar = useSelector((state) => state.rootReducer.data.redrawCharts);
-  console.log(sideBar);
   const dataNew = {
     labels: Object.keys(data),
     datasets: [

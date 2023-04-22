@@ -20,14 +20,18 @@ const addInitialService = async (data) => {
 };
 
 const getSortedDataService = async (data, filter, rangeFilters) => {
-  // console.log(filter);
   return DataModel.find({
     $and: [filter ? filter : {}, ...rangeFilters],
   }).sort(data);
 };
 
-const getDistinctElemService = async (filter) => {
+const getDistinctElemService = async (orAndFilter, rangeFilters) => {
   const uniqueValues = await DataModel.aggregate([
+    {
+      $match: {
+        $and: [orAndFilter ? orAndFilter : {}, ...rangeFilters],
+      },
+    },
     {
       $group: {
         _id: null,
@@ -75,9 +79,6 @@ const getDistinctElemService = async (filter) => {
 };
 
 const getStatDetailsService = async (filter, rangeFilters, statFor) => {
-  console.log({
-    $and: [filter ? filter : {}, ...rangeFilters],
-  });
   const aggAll = await DataModel.aggregate([
     {
       $match: {
@@ -87,6 +88,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
     {
       $facet: {
         region: [
+          { $match: { region: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$region`,
@@ -98,6 +100,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         country: [
+          { $match: { country: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$country`,
@@ -109,6 +112,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         source: [
+          { $match: { source: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$source`,
@@ -120,6 +124,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         pestle: [
+          { $match: { pestle: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$pestle`,
@@ -131,6 +136,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         sector: [
+          { $match: { sector: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$sector`,
@@ -142,6 +148,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         topic: [
+          { $match: { topic: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$topic`,
@@ -153,6 +160,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           },
         ],
         start_year: [
+          { $match: { start_year: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$start_year`,
@@ -165,6 +173,7 @@ const getStatDetailsService = async (filter, rangeFilters, statFor) => {
           { $sort: { _id: 1 } },
         ],
         end_year: [
+          { $match: { end_year: { $exists: true, $nin: ["", null] } } },
           {
             $group: {
               _id: `$end_year`,

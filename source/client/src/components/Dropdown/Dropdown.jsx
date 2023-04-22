@@ -1,6 +1,6 @@
 import "./Dropdown.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createSearchParams, useSearchParams } from "react-router-dom";
 
 const Dropdown = ({

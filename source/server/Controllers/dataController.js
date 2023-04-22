@@ -137,7 +137,8 @@ const getAllSortedDataController = async (req, res, next) => {
 
 const getDistinctElemController = async (req, res, next) => {
   try {
-    const data = await getDistinctElemService(undefined);
+    const { sorting, orAndFilter, filter } = parseRequest(req);
+    const data = await getDistinctElemService(orAndFilter, filter);
     if (data) {
       res.status(200).json({
         type: STATUS.SUCCESS,

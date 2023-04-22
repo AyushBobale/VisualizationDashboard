@@ -2,6 +2,7 @@ import "./StatCard.css";
 
 import React, { useEffect, useState } from "react";
 
+import { Tooltip } from "react-tooltip";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -15,77 +16,77 @@ export const StatCard = () => {
   const getHighestKeys = () => {
     // use search params here
     const formatted = {};
-    formatted["region"] = statDetails?.["region"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["region"] = statDetails?.["region"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["country"] = statDetails?.["country"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["country"] = statDetails?.["country"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["source"] = statDetails?.["source"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["source"] = statDetails?.["source"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["pestle"] = statDetails?.["pestle"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["pestle"] = statDetails?.["pestle"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["pestle"] = statDetails?.["pestle"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["pestle"] = statDetails?.["pestle"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["sector"] = statDetails?.["sector"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["sector"] = statDetails?.["sector"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["topic"] = statDetails?.["topic"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["topic"] = statDetails?.["topic"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["start_year"] = statDetails?.["start_year"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["start_year"] = statDetails?.["start_year"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
-    formatted["end_year"] = statDetails?.["end_year"]?.reduce((max, obj) =>
-      max?.[searchParams.get("summaryOf")] >
-        obj?.[searchParams.get("summaryOf")] &&
-      !!max?._id &&
-      !!obj?._id
-        ? max
-        : obj
+    formatted["end_year"] = statDetails?.["end_year"]?.reduce(
+      (max, obj) =>
+        max?.[searchParams.get("summaryOf")] >
+        obj?.[searchParams.get("summaryOf")]
+          ? max
+          : obj,
+      0
     );
 
     return formatted;
@@ -96,8 +97,13 @@ export const StatCard = () => {
   }, [searchParams, statDetails]);
 
   return (
-    <div className="stat chart-container elivate-shadow">
-      Highest {searchParams.get("summaryOf")}
+    <div className="stat chart-container elivate-shadow" id="stat-div">
+      <Tooltip anchorSelect="#stat-div" className="dark" place="top">
+        Summed up Highest values for each attribute for the select summary of
+        parameter.
+      </Tooltip>
+      Highest {searchParams.get("summaryOf")} {"   "}
+      {!searchParams.get("summaryOf") && "Please select factor for summary of"}
       {/* <div className="stats-inner-container"> */}
       <div className="stat-table">
         <div className="stat-table-header">

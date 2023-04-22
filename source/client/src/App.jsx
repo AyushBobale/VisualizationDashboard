@@ -1,3 +1,5 @@
+import "react-tooltip/dist/react-tooltip.css";
+
 import {
   Outlet,
   Route,
