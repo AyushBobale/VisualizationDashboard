@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import { Home } from "./Pages/Home/Home";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 import { ROUTES } from "./config";
 import React from "react";
@@ -17,7 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path={ROUTES.ROOT} element={<RootLayout />}>
-            <Route path={ROUTES.ROOT} element={<Dashboard />} />
+            <Route path={ROUTES.ROOT} element={<Home />} />
             <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

@@ -33,6 +33,12 @@ body {
   scrollbar-color: var(--primary-font-color) var(--primary-border);
 }
 
+h1 {
+  font-size: 1.6rem;
+}
+h2 {
+  font-size: 1.4rem;
+}
 h3 {
   font-size: 1.2rem;
 }
@@ -57,7 +63,7 @@ h3 {
 }
 
 .elivate-shadow {
-  cursor: pointer;
+  /* cursor: pointer; */
   box-shadow: 0 4px 4px rgba(var(--bg-r), var(--bg-g), var(--bg-b), 0.1);
 }
 
@@ -114,17 +120,23 @@ h3 {
   .nav-outlet-container {
     padding: 0rem 5rem;
   }
+  * {
+    font-size: 0.9rem;
+  }
 }
 
 @media screen and (max-width: 1300px) {
   .nav-outlet-container {
     padding: 0rem 4rem;
   }
+  * {
+    font-size: 0.9rem;
+  }
 }
 
 @media screen and (max-width: 1200px) {
   * {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
   .nav-outlet-container {
     padding: 0rem 3rem;

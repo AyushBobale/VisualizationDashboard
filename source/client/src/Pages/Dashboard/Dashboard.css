@@ -34,8 +34,7 @@
 .chart-container {
   border: 1px solid var(--primary-border);
   border-radius: 6px;
-  /* max-height: 30rem; */
-  /* min-height: 25rem; */
+  /* min-height: 20rem; */
 }
 
 .inner-chart-container {
@@ -90,6 +89,13 @@
 }
 
 @media screen and (max-width: 1500px) {
+  .dou1 {
+    height: 30rem;
+  }
+
+  .stat {
+    height: 30rem;
+  }
   .charts-grid {
     grid-template-areas:
       "dfilt  dfilt   dfilt   dfilt   dfilt   dfilt"

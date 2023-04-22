@@ -13,6 +13,9 @@
 }
 
 .navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--primary);
   border-radius: 6px;
   border: 1px solid var(--primary-border);
@@ -20,4 +23,14 @@
   width: 100%;
   display: flex;
   gap: 1rem;
+}
+
+.navbar-inner > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-inner > div > * {
+  cursor: pointer;
 }

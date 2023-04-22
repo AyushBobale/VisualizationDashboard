@@ -22,7 +22,7 @@ import PieChart from "../../components/Piechart/PieChart";
 import { StatCard } from "../../components/StatCard/StatCard";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
 
-function Dashboard() {
+function Dashboard(props) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const responsiveWindow = useResponsiveWindow();

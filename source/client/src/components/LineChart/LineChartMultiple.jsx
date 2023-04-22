@@ -2,37 +2,11 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import React from "react";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
+import { useSelector } from "react-redux";
 
-function LineChartMultiple({ data, title, keys, options }) {
+function LineChartMultiple({ data, title, keys, options, redraw }) {
   const responsiveWindow = useResponsiveWindow();
-  // const options = {
-  //   scales: {
-  //     y: {
-  //       ticks: {
-  //         font: {
-  //           size: 10,
-  //         },
-  //       },
-  //     },
-  //     x: {
-  //       ticks: {
-  //         font: {
-  //           size: 10,
-  //         },
-  //       },
-  //     },
-  //   },
-  //   responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: "top",
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: title,
-  //     },
-  //   },
-  // };
+  const sideBar = useSelector((state) => state.rootReducer.data.redrawCharts);
 
   const dataNew = {
     labels: Object.keys(data),
@@ -51,6 +25,7 @@ function LineChartMultiple({ data, title, keys, options }) {
         data={dataNew}
         options={options}
         height={responsiveWindow?.phone ? 250 : null}
+        key={JSON.stringify(sideBar)}
       />
     </div>
   );

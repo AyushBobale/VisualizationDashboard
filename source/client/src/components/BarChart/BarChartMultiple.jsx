@@ -2,6 +2,7 @@ import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import React from "react";
 import { useResponsiveWindow } from "../../Hooks/useResponsiveWindow";
+import { useSelector } from "react-redux";
 
 const BarChartMultiple = ({
   data,
@@ -11,20 +12,11 @@ const BarChartMultiple = ({
   title,
   keys,
   options,
+  redraw,
 }) => {
   const responsiveWindow = useResponsiveWindow();
-  // const options = {
-  //   responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: "top",
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: title,
-  //     },
-  //   },
-  // };
+  const sideBar = useSelector((state) => state.rootReducer.data.redrawCharts);
+
   const dataNew = {
     labels: Object.keys(data),
     datasets: keys?.map((elm, idx) => {
@@ -43,6 +35,7 @@ const BarChartMultiple = ({
         data={dataNew}
         options={options}
         height={responsiveWindow?.phone ? 250 : null}
+        key={JSON.stringify(sideBar)}
       />
     </div>
   );

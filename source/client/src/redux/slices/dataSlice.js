@@ -50,6 +50,11 @@ export const getStatDetailsThunk = createAsyncThunk(
 
 const initialState = {
   loading: false,
+  sideBar: true,
+  redrawCharts: {
+    sideBar: true,
+    explicit: true,
+  },
   errorData: {
     message: "",
     type: "",
@@ -72,6 +77,15 @@ const initialState = {
 const dataSlice = createSlice({
   name: "data",
   initialState: initialState,
+  reducers: {
+    toggleSideBar: (state, action) => {
+      state.sideBar = !state.sideBar;
+      state.redrawCharts.sideBar = state.sideBar;
+    },
+    redrawCharts: (state, action) => {
+      state.redrawCharts.explicit = !state.redrawCharts.explicit;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllDataThunk.pending, (state, action) => {
@@ -181,4 +195,4 @@ const dataSlice = createSlice({
 });
 
 export default dataSlice.reducer;
-export const {} = dataSlice.actions;
+export const { toggleSideBar, redrawCharts } = dataSlice.actions;
