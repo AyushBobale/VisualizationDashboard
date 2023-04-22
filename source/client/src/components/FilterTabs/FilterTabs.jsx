@@ -70,7 +70,7 @@ export const FilterTabs = () => {
             {" "}
             Reset Filters
           </button>
-          <Tooltip anchorSelect="#reset-btn" className="dark" place="top">
+          <Tooltip anchorSelect="#reset-btn" className="dark" place="top"top">
             Resets all the selected variables on the page.
           </Tooltip>
         </div>
@@ -84,7 +84,7 @@ export const FilterTabs = () => {
           >
             {andOr ? "Or" : "And"} Filter Values
           </button>
-          <Tooltip anchorSelect="#and-or-btn" className="dark" place="top">
+          <Tooltip anchorSelect="#and-or-btn" className="dark" place="top"top">
             This toggles between 'And' and 'Or' to fetch data in that fashion,
             based on the factors selected in the below dropdowns. <br />
             For Example Country: India or Region: Africa
@@ -92,7 +92,7 @@ export const FilterTabs = () => {
         </div>
       </div>
       <div className="filter-tabs-root-cont">
-        <Tooltip anchorSelect="#filter-att" className="dark" place="left">
+        <Tooltip anchorSelect="#filter-att" className="dark" place="top"left">
           Filter Attribute to filter data for fine grained results.
         </Tooltip>
         <div>

@@ -287,7 +287,7 @@ function Dashboard(props) {
             onSelectedOptionChange={setSelectedSortParam}
           />
         </div>
-        <Tooltip anchorSelect="#search-by-drop" className="dark" place="left">
+        <Tooltip anchorSelect="#search-by-drop" className="dark" place="top"left">
           This is the primary range in which the data is searched by any of the
           properities in the dropdown
         </Tooltip>
@@ -302,7 +302,7 @@ function Dashboard(props) {
           <Tooltip
             anchorSelect="#search-from-drop"
             className="dark"
-            place="left"
+            place="top"left"
           >
             If no options are visible, please select Search By Parameter.
           </Tooltip>
@@ -330,7 +330,7 @@ function Dashboard(props) {
             <Tooltip
               anchorSelect="#summarize-for-drop"
               className="dark"
-              place="left"
+              place="top"left"
             >
               The below doughnut chart summarises data based on this factor.{" "}
               <br />
@@ -348,7 +348,7 @@ function Dashboard(props) {
             <Tooltip
               anchorSelect="#summarize-of-drop"
               className="dark"
-              place="left"
+              place="top"left"
             >
               The below doughnut chart sums data based on this factor. <br />
               For example, Intensity will give you the sum of each Sector.
@@ -357,7 +357,7 @@ function Dashboard(props) {
         </div>
         <div className="charts-grid"></div>
         <div className="dou1 chart-container elivate-shadow" id="dou-chart">
-          <Tooltip anchorSelect="#dou-chart" className="dark" place="top">
+          <Tooltip anchorSelect="#dou-chart" className="dark" place="top"top">
             Summed up attribute distribution by selecte Summary For parameter.
           </Tooltip>
           <DoughnutChart
@@ -387,7 +387,7 @@ function Dashboard(props) {
               onSelectedOptionChange={setSelectedAttribute}
             />
           </div>
-          <Tooltip anchorSelect="#att-drop" className="dark" place="left">
+          <Tooltip anchorSelect="#att-drop" className="dark" place="top"left">
             Selects the attribute for the below to charts to isolate and see a
             single attribute.
           </Tooltip>
@@ -436,7 +436,7 @@ function Dashboard(props) {
             options={createOptions(`${selectedAttribute?.value} Sum per year`)}
           />
         </div>
-        <Tooltip anchorSelect="#single-chart" className="dark" place="left">
+        <Tooltip anchorSelect="#single-chart" className="dark" place="top"left">
           Plots the chart between ranges selected above for the attribute
         </Tooltip>
         <div
@@ -471,7 +471,7 @@ function Dashboard(props) {
             options={createOptions(`Combined Sum per year`)}
           />
         </div>
-        <Tooltip anchorSelect="#multiple-chart" className="dark" place="top">
+        <Tooltip anchorSelect="#multiple-chart" className="dark" place="top"top">
           Plots the chart between ranges selected above for all attributes.
         </Tooltip>
       </div>

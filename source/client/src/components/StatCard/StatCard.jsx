@@ -98,7 +98,7 @@ export const StatCard = () => {
 
   return (
     <div className="stat chart-container elivate-shadow" id="stat-div">
-      <Tooltip anchorSelect="#stat-div" className="dark" place="top">
+      <Tooltip anchorSelect="#stat-div" className="dark" place="top"top">
         Summed up Highest values for each attribute for the select summary of
         parameter.
       </Tooltip>
