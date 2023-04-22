@@ -1,6 +1,7 @@
 import { addInitialDataController } from "../Controllers/dataController.js";
 import mongoose from "mongoose";
-import data from "../jsondata.json" assert { type: "json" };
+
+// import data from "../jsondata.json" assert { type: "json" };
 
 const connectDB = async () => {
   try {
