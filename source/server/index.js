@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [process.env.CORS_DOMAIN],
+    origin: [process.env.CORS_DOMAIN, "http://192.168.1.5:3000"],
   })
 );
 
