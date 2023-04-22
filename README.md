@@ -1,5 +1,9 @@
 # VisualizationDashboard
 
+## Visit Hosted version
+
+[Visit Page](https://visualization-dash.onrender.com/)
+
 ## Versions and Dependencies
 
 ```bash
